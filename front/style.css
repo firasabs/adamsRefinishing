@@ -1,0 +1,41 @@
+.slider-container {
+  width: 80%;
+  max-width: 700px;
+  margin: 20px auto;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9; /* Enforces same height ratio */
+}
+
+.before-img,
+.overlay img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crops to fit while preserving ratio */
+}
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; /* Start at center */
+  height: 100%;
+  overflow: hidden;
+}
+
+.handle {
+  position: absolute;
+  top: 0;
+  left: 50%; /* Start at center */
+  width: 4px;
+  height: 100%;
+  background: #fff;
+  border: 2px solid #000;
+  cursor: ew-resize;
+  transform: translateX(-50%);
+  z-index: 2;
+}
