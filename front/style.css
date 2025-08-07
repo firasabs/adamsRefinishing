@@ -1,41 +1,66 @@
-.slider-container {
-  width: 80%;
-  max-width: 700px;
-  margin: 20px auto;
+:root {
+  --gold: #C7A925;
+  --green: #558957;
+  --beige: #E8DDBE;
+  --dark: #1A1A1A;
+}
+body {
+  background: var(--beige);
+  color: var(--dark);
+}
+header {
+  background: var(--dark);
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-container img {
+  height: 60px;        /* Reduce height */
+  width: auto;         /* Maintain aspect ratio */
+  object-fit: contain;
+}
+
+.logo-container h1 {
+  font-size: 1.8rem;
+  color: var(--gold);  /* Optional: brand color */
+  margin: 0;
+}
+}
+header a {
+  color: var(--gold);
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.gallery-section {
+  text-align: center;
+  padding: 2rem;
+}
+
+h1, h2 {
+  color: var(--green);
+}
+
+p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #555;
+}
+
+.carousel-container {
   position: relative;
+  max-width: 800px;
+  margin: 0 auto;
   overflow: hidden;
-  aspect-ratio: 16 / 9; /* Enforces same height ratio */
+  border-radius: 10px;
 }
 
-.before-img,
-.overlay img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Crops to fit while preserving ratio */
-}
-
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%; /* Start at center */
-  height: 100%;
-  overflow: hidden;
-}
-
-.handle {
-  position: absolute;
-  top: 0;
-  left: 50%; /* Start at center */
-  width: 4px;
-  height: 100%;
-  background: #fff;
-  border: 2px solid #000;
-  cursor: ew-resize;
-  transform: translateX(-50%);
-  z-index: 2;
-}
+.slide {
+  display: none;
