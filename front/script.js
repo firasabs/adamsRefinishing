@@ -33,3 +33,25 @@ document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
     handle.style.left = `${x}px`;
   });
 });
+const filterButtons = document.querySelectorAll('.filter-buttons button');
+const workCards = document.querySelectorAll('.work-card');
+
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const filter = button.getAttribute('data-filter');
+
+    // Update button states
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    // Filter cards
+    workCards.forEach(card => {
+      if (filter === 'all' || card.dataset.category === filter) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
