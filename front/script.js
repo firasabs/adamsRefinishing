@@ -20,6 +20,7 @@ document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
 
   handle.addEventListener('mousedown', () => isDragging = true);
   window.addEventListener('mouseup', () => isDragging = false);
+
   window.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
 
@@ -33,6 +34,10 @@ document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
     handle.style.left = `${x}px`;
   });
 });
+
+
+
+
 const filterButtons = document.querySelectorAll('.filter-buttons button');
 const workCards = document.querySelectorAll('.work-card');
 
