@@ -45,6 +45,43 @@ header a {
   text-align: center;
   padding: 2rem;
 }
+/* ---- HERO base ---- */
+.hero{
+  position: relative;
+  min-height: 58vh;
+  display: grid;
+  place-items: center;
+  padding: 64px 16px;
+  overflow: hidden;
+  text-align: center;
+}
+.hero::before{ /* dark overlay */
+  content:""; position:absolute; inset:0;
+  background: radial-gradient(1200px 600px at 50% 30%, rgba(0,0,0,.35), rgba(0,0,0,.65));
+}
+.hero-inner{ position: relative; z-index: 1; color: var(--white); max-width: 900px; }
+.hero h1{ margin: 0 0 8px; font-weight: 800; letter-spacing:.5px; }
+.hero p{ color:#e8e8e8; margin:0 auto 18px; max-width: 720px; }
+
+/* buttons */
+.btn{ display:inline-flex; align-items:center; gap:.5rem; padding:12px 18px; border-radius:999px;
+      font-weight:700; text-decoration:none; transition:transform .15s, box-shadow .15s, background .15s; }
+.btn:hover{ transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.18); }
+.btn-solid{ background: var(--gold); color:#000; }
+.btn-outline{ color:#fff; border:1.5px solid rgba(255,255,255,.9); }
+.btn-outline:hover{ background:rgba(255,255,255,.1); }
+
+/* image background */
+.hero-image{
+  background: url("images/kitchens/IMG_1930.jpeg") center/cover no-repeat;
+}
+
+/* typography sizes */
+@media (min-width: 768px){
+  .hero{ min-height: 68vh; }
+  .hero h1{ font-size: clamp(1.6rem, 2.8vw, 3rem); }
+  .hero p{ font-size: clamp(1rem, 1.2vw, 1.1rem); }
+}
 
 h1, h2 {
 text-align: center;
@@ -188,4 +225,142 @@ p {
 }
 
 .work-card img {
-  wid
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.work-card p {
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+.about-section {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  margin: auto;
+  gap: 2rem;
+}
+
+.about-content img {
+  max-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.about-text {
+  max-width: 500px;
+  text-align: right; /* RTL text */
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+/* CONTACT */
+.contact {
+  background: linear-gradient(180deg, var(--beige) 0%, #f3efe6 100%);
+  padding: 60px 16px 40px;
+}
+.contact-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.contact-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  border: 1px solid rgba(0,0,0,.06);
+  text-align: center;
+}
+.contact-card h2 {
+  color: var(--green);
+  margin: 0 0 6px;
+}
+.contact-card .subtitle {
+  margin: 0 0 18px;
+  color: #6b6b6b;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.12); }
+
+.tel-btn {
+  background: var(--gold);
+  color: #000;
+}
+.tel-btn:hover { background: var(--gold); }
+
+.wa-btn {
+  background: var(--green);
+  color: green;
+}
+.wa-btn:hover {
+  filter: brightness(1.05);
+}
+
+.icon { font-size: 1.1rem; line-height: 1; }
+.wa-btn i {
+  font-size: 1.2rem;
+  margin-left: 6px; /* For RTL, you might want margin-right instead */
+}
+/* meta rows */
+.contact-meta {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  margin: 10px 0 14px;
+  color: var(--dark);
+}
+.meta-item { display: flex; gap: 6px; }
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 6px;
+}
+.chip {
+  background: #f1f1f1;
+  border: 1px solid #e6e6e6;
+  color: var(--dark);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: .9rem;
+}
+
+/* FOOTER */
+.site-footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 16px 0;
+  margin-top: 24px;
+}
+.footer-wrap {
+  max-width: 1000px; margin: 0 auto; padding: 0 16px; text-align: center;
+}
+.site-footer p { margin: 0; }
