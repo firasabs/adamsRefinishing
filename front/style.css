@@ -12,7 +12,7 @@ body {
 }
 header {
   background: transparent;
-  position: absolute;
+  position: fixed;
   width: 95%;
   top: 0;
   left: 0;
@@ -22,8 +22,16 @@ header {
   display: flex;
   justify-content: space-between; /* logo left, nav right */
   align-items: center;
+  transition: background-color 0.3s ease;
 }
 
+header nav a:nth-child(1){ order: 3; } /* עבודות */
+header nav a:nth-child(2){ order: 1; } /* צור קשר */
+header nav a:nth-child(3){ order: 2; } /* קצת עלינו */
+
+header.scrolled {
+  background: var(--black); /* solid black after scroll */
+}
 .logo-container {
   display: flex;
   align-items: center;
@@ -298,6 +306,9 @@ p {
   margin: auto;
   gap: 2rem;
 }
+header nav a:nth-child(1){ order: 3; } /* בית */
+header nav a:nth-child(2){ order: 2; } /*עבודות*/
+header nav a:nth-child(3){ order: 1; } /* צור קשר */
 
 .about-content img {
   max-width: 300px;
