@@ -58,3 +58,113 @@ filterButtons.forEach(button => {
       }
     });
   });
+});
+// ---------- PROJECT MODAL ----------
+(() => {
+  const modal = document.getElementById('workModal');
+  const titleEl = modal.querySelector('.work-modal__title');
+  const descEl  = modal.querySelector('.work-modal__desc');
+  const imgEl   = modal.querySelector('.work-modal__image');
+  const thumbs  = modal.querySelector('.work-modal__thumbs');
+  const prevBtn = modal.querySelector('.prev');
+  const nextBtn = modal.querySelector('.next');
+  const closeEls = modal.querySelectorAll('[data-close]');
+
+  let current = { images: [], index: 0 };
+
+  function openModal({ title, desc, images }) {
+    current.images = images;
+    current.index = 0;
+
+    titleEl.textContent = title || '';
+    descEl.textContent  = desc  || '';
+
+    buildThumbs();
+    renderImage();
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function renderImage() {
+    const src = current.images[current.index];
+    imgEl.src = src;
+    imgEl.alt = titleEl.textContent || 'תמונה';
+
+    // update thumbs active state
+    [...thumbs.children].forEach((t, i) => {
+      t.classList.toggle('active', i === current.index);
+    });
+  }
+
+  function buildThumbs() {
+    thumbs.innerHTML = '';
+    current.images.forEach((src, i) => {
+      const t = document.createElement('img');
+      t.src = src;
+      t.alt = 'תצוגה מקדימה';
+      if (i === current.index) t.classList.add('active');
+      t.addEventListener('click', () => {
+        current.index = i;
+        renderImage();
+      });
+      thumbs.appendChild(t);
+    });
+  }
+
+  function next() {
+    current.index = (current.index + 1) % current.images.length;
+    renderImage();
+  }
+  function prev() {
+    current.index = (current.index - 1 + current.images.length) % current.images.length;
+    renderImage();
+  }
+
+  // Attach to cards
+  document.querySelectorAll('.work-card').forEach(card => {
+    card.addEventListener('click', () => {
+      // read data from the card
+      const title  = card.getAttribute('data-title') || card.querySelector('p')?.textContent || '';
+      const desc   = card.getAttribute('data-desc')  || '';
+      const imgs   = (card.getAttribute('data-images') || '')
+                      .split(',')
+                      .map(s => s.trim())
+                      .filter(Boolean);
+
+      // Fallback: if no data-images, use the main image only
+      if (imgs.length === 0) {
+        const mainImg = card.querySelector('img')?.getAttribute('src');
+        if (mainImg) imgs.push(mainImg);
+      }
+
+      openModal({ title, desc, images: imgs });
+    });
+  });
+
+  // Controls
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+
+  // Close (X / backdrop)
+  closeEls.forEach(el => el.addEventListener('click', closeModal));
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Keyboard
+  window.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft')  prev();
+  });
+})();
+

@@ -12,7 +12,7 @@
 <body>
   <header>
     <div class="logo-container">
-      <img src="front/images/logo/adam's painting.png" alt="Adam Painting Logo">
+      <img src="front/images/logo/trans_airgun.png" alt="Adam Painting Logo">
       <h1>מצבעת אדם</h1>
     </div>
     <nav>
@@ -100,4 +100,111 @@
 
   </div>
 
- 
+  <!-- Gallery grid -->
+  <div class="work-grid">
+    <div class="work-card"
+        data-category="kitchen"
+        data-title="שיפוץ מטבח"
+        data-desc="חידוש דלתות, איי, צביעה בתנור"
+        data-images="front/images/kitchens/before1.jpeg,front/images/kitchens/after1.jpg">
+      <img src="front/images/kitchens/after1.jpg" alt="Kitchen Project">
+      <p>שיפוץ מטבח</p>
+    </div>
+
+    <div class="work-card" 
+        data-category="doors"
+        data-title="צביעת דלת כניסה"
+        data-desc="חידוש דלת"
+        data-images="front/images/doors/nseer's door.jpeg">
+      <img src="front/images/doors/nseer's door.jpeg" alt="Door Project">
+      <p>צביעת דלת כניסה</p>
+    </div>
+        <div class="work-card"         
+        data-category="doors"
+        data-title="צביעת דלת כניסה"
+        data-desc="חידוש דלת"
+        data-images="front/images/doors/door1A.jpg,front/images/doors/door1B.jpg">
+      <img src="front/images/doors/door1A.jpg" alt="Door Project">
+      <p>צביעת דלת כניסה</p>
+    </div>
+    <div class="work-card" 
+        data-category="furniture"
+        data-title="צביעת שולחנות"
+        data-desc="צביעת שולחן אוכל וסלון "
+        data-images="front/images/tabels/TAtta.jpg,front/images/tabels/TAtta2.jpg ">
+      <img src="front/images/tabels/TAtta.jpg" alt="Table Repaint">
+      <p>שיפוץ שולחן עץ</p>
+    </div>
+    <div class="work-card" 
+        data-category="windows"
+        data-title="צביעת חלונות">
+      <img src="front/images/windows/the duke.jpg">
+      <p>צביעת חלונות</p>
+    </div>
+    <!-- Add more cards -->
+  </div>
+</section>
+<div class="work-modal" id="workModal" aria-hidden="true">
+  <div class="work-modal__backdrop" data-close></div>
+  <div class="work-modal__content" role="dialog" aria-modal="true">
+    <button class="work-modal__close" title="סגור" data-close>&times;</button>
+
+    <h3 class="work-modal__title"></h3>
+    <p class="work-modal__desc"></p>
+
+    <div class="work-modal__viewer">
+      <button class="nav prev" aria-label="הקודם">&#10094;</button>
+      <img class="work-modal__image" src="" alt="">
+      <button class="nav next" aria-label="הבא">&#10095;</button>
+    </div>
+
+    <div class="work-modal__thumbs"></div>
+  </div>
+</div>
+
+
+<section class="contact" id="contact">
+  <div class="contact-wrap">
+    <div class="contact-card">
+      <h2>צור קשר</h2>
+      <p class="subtitle" >נשמח לייעוץ חינם והצעת מחיר</p>
+
+      <div class="contact-actions">
+        <a class="btn tel-btn" href="tel:+972527245614" aria-label="התקשרו למצבעת אדם">
+          <span class="icon" aria-hidden="true">📞</span>
+          052‑724‑5614
+        </a>
+        <a class="btn wa-btn" href="https://wa.me/972525537552" target="_blank" rel="noopener" aria-label="פתיחת שיחת WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+          WhatsApp
+        </a>
+
+      </div>
+
+      <div class="contact-meta">
+        <div class="meta-item" dir="rtl">
+          <strong>אזור עבודה:</strong>
+          <span>צפון–מרכז (הגעה עד בית הלקוח)</span>
+        </div>
+      </div>
+
+      <div class="chip-list">
+        <span class="chip">חידוש מטבחים</span>
+        <span class="chip">צביעת דלתות</span>
+        <span class="chip">רהיטים עץ מלא</span>
+        <span class="chip">צביעה בתנור</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <p>© 2025 מצבעת אדם. כל הזכויות שמורות.</p>
+  </div>
+</footer>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
