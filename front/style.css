@@ -9,6 +9,7 @@
 body {
   background: var(--beige);
   color: var(--dark);
+  font-family: "Noto Sans Hebrew", "Arial", sans-serif;
 }
 header {
   background: transparent;
@@ -23,6 +24,7 @@ header {
   justify-content: space-between; /* logo left, nav right */
   align-items: center;
   transition: background-color 0.3s ease;
+  font-family: "Noto Sans Hebrew", "Arial", sans-serif;
 }
 
 header nav a:nth-child(1){ order: 3; } /* עבודות */
@@ -36,6 +38,7 @@ header.scrolled {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  font-family: "Noto Sans Hebrew", "Arial", sans-serif;
 }
 
 .logo-container img {
@@ -79,6 +82,7 @@ header nav a:hover {
   padding: 64px 16px;
   overflow: hidden;
   text-align: center;
+  font-family: "Noto Sans Hebrew", "Arial", sans-serif;
 }
 .hero::before{ /* dark overlay */
   content:""; position:absolute; inset:0;
@@ -107,10 +111,63 @@ header nav a:hover {
   .hero h1{ font-size: clamp(1.6rem, 2.8vw, 3rem); }
   .hero p{ font-size: clamp(1rem, 1.2vw, 1.1rem); }
 }
+.intro{
+  position: relative;
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  padding: 0 16px;
+  text-align: center;           /* מרכז טקסט וכפתורים */
+}
+
+.hero-inner{
+  position: relative; z-index: 1;
+  max-width: 900px;
+  padding: 18px 24px;
+  border-radius: 14px;
+  background: transparent;
+  backdrop-filter: blur(2px);
+  color: var(--white);
+  animation: fadeUp .7s ease-out both;
+}
+.hero-inner h2{
+  margin: 0 0 8px;
+  font-size: clamp(26px, 4vw, 40px);
+  letter-spacing: .5px;
+}
+.hero-inner p{
+  margin: 0 0 18px;
+  color: #e8e8e8;
+}
+
+/* כפתורים */
+.hero-actions{  gap:12px; justify-content:center; }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding: 10px 18px; border-radius: 999px;
+  font-weight: 700; text-decoration:none; line-height:1;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+  will-change: transform;
+}
+.btn-primary{ background: var(--gold); color: #1a1a1a; box-shadow: 0 8px 18px rgba(205,162,85,.25); }
+.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 12px 24px rgba(205,162,85,.35); }
+/* אנימציה עדינה לטקסט וכפתורים */
+@keyframes fadeUp{
+  from{ opacity:0; transform: translateY(10px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+.hero-actions .btn:nth-child(1){ animation: fadeUp .7s .1s both; }
+.hero-actions .btn:nth-child(2){ animation: fadeUp .7s .2s both; }
+
+/* למשתמשים שמעדיפים פחות אנימציה */
+@media (prefers-reduced-motion: reduce){
+  .hero-inner, .hero-actions .btn{ animation: none !important; }
+}
+.hero-actions{ direction: rtl; }
 
 h1, h2 {
 text-align: center;
-  color: var(--green);
+color: var(--green);
 }
 
 p {
@@ -143,6 +200,8 @@ p {
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+  background:#000;
 }
 
 .before-img,
@@ -162,7 +221,6 @@ p {
   width: 50%; /* start pivot in center */
   height: 100%;
   overflow: hidden;
-  /* ❌ No transition here — makes pivot instant */
 }
 
 .handle {
@@ -170,7 +228,7 @@ p {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
+  width: 3px;
   height: 100%;
   background: #CDA255; /* gold */
   z-index: 10;
@@ -179,14 +237,40 @@ p {
   align-items: center;
   justify-content: center;
 }
+.handle::after{
+  content:"";
+  position:absolute;
+  left:50%; top:50%;
+  translate:-50% -50%;
+  width:40px; height:40px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 4px 16px rgba(0,0,0,.25), inset 0 0 0 2px rgba(0,0,0,.1);
+}
 
 .arrows {
-  color: white;
+  color:#1a1a1a;
+  position:absolute; inset:0; display:grid; place-items:center;
   font-size: 1.5rem;
   transform: rotate(0deg);
   user-select: none;
 }
-
+.slider-wrapper:not(.dragging) .overlay{ transition: width .35s ease; }
+.slider-wrapper:not(.dragging) .handle{ transition: left .35s ease; }
+@keyframes slider-nudge {
+  0%   { left: 50%; }
+  30%  { left: 40%; }
+  60%  { left: 60%; }
+  100% { left: 50%; }
+}
+.slider-wrapper.hint .handle { animation: slider-nudge 1.8s ease; }
+.slide.active .slider-wrapper{
+  animation: slideIn .35s ease both;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px) scale(.995); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+} 
 
 .pagination {
   margin-top: 1rem;
@@ -200,11 +284,16 @@ p {
   margin: 0 5px;
   border-radius: 6px;
   cursor: pointer;
+  user-select:none;
+
 }
 
 .page-dot.active {
   background: var(--gold);
   color: black;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,.12);
+  border: 1px solid rgba(0,0,0,.06);
 }
 .full-gallery {
   padding: 3rem 1rem;
@@ -234,20 +323,27 @@ p {
   color: var(--white);
 }
 
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:24px;
+  padding:16px;
 }
 
-.work-card {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  overflow: hidden;
-  background: var(--beige);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+.work-card{
+  background:transparent;
+  border:none;
+  box-shadow:none;
+  cursor:pointer;
+} 
+.card-image{
+  position:relative;
+  aspect-ratio:20/13;          
+  border-radius:14px;
+  overflow:hidden;
+  background:#f2f2f2;
 }
+.work-card:hover .card-image img{ transform:scale(1.05); }
 
 .work-card img {
   width: 100%;
@@ -259,6 +355,15 @@ p {
   padding: 0.5rem;
   font-size: 0.95rem;
   color: var(--text-dark);
+}
+.card-info{ margin-top:8px; font-size:.95rem; color:#222; direction:rtl; }
+.card-top{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:8px;
+}
+.card-title{
+  margin:0; font-size:1rem; font-weight:600; overflow:hidden;
+  text-overflow:ellipsis; white-space:nowrap;
 }
 /* Modal shell */
 .work-modal{ position:fixed; inset:0; display:none; z-index:9999; }
@@ -419,6 +524,7 @@ header nav a:nth-child(3){ order: 1; } /* צור קשר */
   color: var(--white);
   padding: 16px 0;
   margin-top: 24px;
+  font-family: "Noto Sans Hebrew", "Arial", sans-serif;
 }
 .footer-wrap {
   max-width: 1000px; margin: 0 auto; padding: 0 16px; text-align: center;

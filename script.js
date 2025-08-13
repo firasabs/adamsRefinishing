@@ -11,27 +11,80 @@ dots.forEach(dot => {
   });
 });
 
-// Before/after handle drag functionality
-document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
+// Before/after handle drag functionality with polish
+document.querySelectorAll('.slider-wrapper').forEach((wrapper, idx) => {
   const overlay = wrapper.querySelector('.overlay');
   const handle = wrapper.querySelector('.handle');
 
   let isDragging = false;
 
-  handle.addEventListener('mousedown', () => isDragging = true);
-  window.addEventListener('mouseup', () => isDragging = false);
+  // one-time hint on the first slider only
+  if (idx === 0) {
+    wrapper.classList.add('hint');
+    setTimeout(() => wrapper.classList.remove('hint'), 2000);
+  }
 
-  window.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-
+  const setX = (clientX) => {
     const rect = wrapper.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-
-    if (x < 0) x = 0;
-    if (x > rect.width) x = rect.width;
-
+    let x = clientX - rect.left;
+    x = Math.max(0, Math.min(x, rect.width));
     overlay.style.width = `${x}px`;
     handle.style.left = `${x}px`;
+  };
+
+  // mouse
+  handle.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    wrapper.classList.add('dragging');
+    e.preventDefault();
+  });
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    wrapper.classList.remove('dragging');
+
+    // snap to neat positions (40%, 50%, 60%) on release
+    const rect = wrapper.getBoundingClientRect();
+    const x = parseFloat(handle.style.left || '50%') / 100 * rect.width || parseFloat(handle.style.left);
+    const pct = x / rect.width;
+    const targets = [0.4, 0.5, 0.6];
+    const nearest = targets.reduce((a,b)=> Math.abs(b-pct) < Math.abs(a-pct) ? b : a, targets[0]);
+    overlay.style.width = `${nearest*rect.width}px`;
+    handle.style.left = `${nearest*rect.width}px`;
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    setX(e.clientX);
+  });
+
+  // touch
+  handle.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    wrapper.classList.add('dragging');
+  }, {passive:true});
+  window.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    wrapper.classList.remove('dragging');
+  }, {passive:true});
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    setX(e.touches[0].clientX);
+  }, {passive:true});
+
+  // keyboard support when focused (accessibility)
+  handle.setAttribute('tabindex', '0');
+  handle.addEventListener('keydown', (e) => {
+    const rect = wrapper.getBoundingClientRect();
+    const cur = parseFloat(overlay.style.width) || rect.width/2;
+    const step = rect.width * 0.08; // 8%
+    if (e.key === 'ArrowRight') {
+      overlay.style.width = `${Math.min(rect.width, cur + step)}px`;
+      handle.style.left = overlay.style.width;
+    } else if (e.key === 'ArrowLeft') {
+      overlay.style.width = `${Math.max(0, cur - step)}px`;
+      handle.style.left = overlay.style.width;
+    }
   });
 });
 

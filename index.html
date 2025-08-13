@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="he">
+ <html lang="he">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,27 +18,30 @@
     <nav>
       <a href="#all-works">עבודות</a>
       <a href="#contact">צור קשר</a>
-      <a href="front/about.html">קצת עלינו</a>
+      <a href="front/about.html">מי אנחנו</a>
       
 
     </nav>
   </header>
 
   <section class="hero hero-image">
-    <div class="hero-inner">
-      <h1>צביעה וחידוש מטבחים ורהיטים</h1>
-      <p>מאז 1986 — אמנות, יצירה ומקצועיות. חידוש מטבחים, דלתות ורהיטים בגימור מושלם.</p>
+    <section class="intro">
+      <div class="hero-inner">
+        <h2>צביעה וחידוש מטבחים ורהיטים</h2>
+        <p>מאז 1986 — אמנות, יצירה ומקצועיות. חידוש מטבחים, דלתות ורהיטים בגימור מושלם</p>
 
-      <div class="hero-cta">
-        <a href="#all-works" class="btn btn-outline">עבודות</a>
-        <a href="#contact" class="btn btn-solid">קבלו הצעת מחיר</a>
+        <div class="hero-cta">
+          <a href="#all-works" class="btn btn-outline">עבודות</a>
+          <a href="#contact" class="btn btn-solid">קבלו הצעת מחיר</a>
+        </div>
       </div>
-    </div>
+    </section>
   </section>
 
   <section class="gallery-section" id="gallery">
-    <h2>שיפוץ / חידוש</h2>
-    <p>לפני ואחרי </p>
+    <h2>לפני ואחרי </h2>
+    <h3>חידוש</h3>
+ 
     <div class="carousel-container">
       <!-- Slide 1 -->
       <div class="slide active">
@@ -96,7 +99,7 @@
     <button data-filter="kitchen">מטבחים</button>
     <button data-filter="doors">דלתות</button>
     <button data-filter="furniture">רהיטים</button>
-    <button data-filter="dekts">דיקטים</button>
+    <button data-filter="dects">דיקטים</button>
     <button data-filter="windows">חלונות</button>
 
   </div>
@@ -141,6 +144,13 @@
         data-title="צביעת חלונות">
       <img src="front/images/windows/the duke.jpg">
       <p>צביעת חלונות</p>
+    </div>
+        <div class="work-card" 
+        data-category="dects"
+        data-title="צביעת דיקטים"
+        data-images="front/images/dect/IMG_8884.jpeg,front/images/dect/IMG_8875.png">
+      <img src="front/images/dect/IMG_8884.jpeg" alt="dect Repaint">
+      <p> צביעת דיקט</p>
     </div>
     <!-- Add more cards -->
   </div>
