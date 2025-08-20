@@ -24,19 +24,36 @@
     </nav>
   </header>
 
-  <section class="hero hero-image">
-    <section class="intro">
-      <div class="hero-inner">
-        <h2>צביעה וחידוש מטבחים ורהיטים</h2>
-        <p>מאז 1986 — אמנות, יצירה ומקצועיות. חידוש מטבחים, דלתות ורהיטים בגימור מושלם</p>
+  <section class="hero hero-video">
+  <!-- Background video -->
+  <video
+    class="hero-bg"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="images/kitchens/IMG_1930.jpeg">
+    <!-- Desktop (16:9) -->
+    <source src="front/videos/heroBackground.mp4" type="video/mp4" media="(min-aspect-ratio: 4/3)">
+    <!-- Mobile portrait (9:16) -->
+    <source src="front/videos/heroBackground.mp4" type="video/mp4" media="(max-aspect-ratio: 3/4)">
+  </video>
 
-        <div class="hero-cta">
-          <a href="#all-works" class="btn btn-outline">עבודות</a>
-          <a href="#contact" class="btn btn-solid">קבלו הצעת מחיר</a>
-        </div>
+  <!-- Your existing content -->
+  <section class="intro">
+    <div class="hero-inner">
+      <h2>צביעה וחידוש מטבחים ורהיטים</h2>
+      <p>מאז 1986 — אמנות, יצירה ומקצועיות. חידוש מטבחים, דלתות ורהיטים בגימור מושלם</p>
+
+      <div class="hero-cta">
+        <a href="#all-works" class="btn btn-outline">עבודות</a>
+        <a href="#contact" class="btn btn-solid">קבלו הצעת מחיר</a>
       </div>
-    </section>
+    </div>
   </section>
+</section>
+
 
   <section class="gallery-section" id="gallery">
     <h2>לפני ואחרי </h2>

@@ -88,7 +88,15 @@ header nav a:hover {
   content:""; position:absolute; inset:0;
   background: radial-gradient(1200px 600px at 50% 30%, rgba(0,0,0,.35), rgba(0,0,0,.65));
 }
-.hero-inner{ position: relative; z-index: 1; color: var(--white); max-width: 900px; }
+.hero-video .hero-bg{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* fills hero like your image did */
+  z-index: 0;
+  filter: brightness(.85);  /* gentle darken; optional */
+}
 .hero h1{ margin: 0 0 8px; font-weight: 800; letter-spacing:.5px; }
 .hero p{ color:#e8e8e8; margin:0 auto 18px; max-width: 720px; }
 
@@ -99,11 +107,6 @@ header nav a:hover {
 .btn-solid{ background: var(--gold); color:#000; }
 .btn-outline{ color:#fff; border:1.5px solid rgba(255,255,255,.9); }
 .btn-outline:hover{ background:rgba(255,255,255,.1); }
-
-/* image background */
-.hero-image{
-  background: url("images/kitchens/IMG_1930.jpeg") center/cover no-repeat;
-}
 
 /* typography sizes */
 @media (min-width: 768px){
@@ -530,3 +533,35 @@ header nav a:nth-child(3){ order: 1; } /* צור קשר */
   max-width: 1000px; margin: 0 auto; padding: 0 16px; text-align: center;
 }
 .site-footer p { margin: 0; }
+.video-background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.video-background video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+
+.about-overlay {
+  position: relative;
+  z-index: 1;
+  background: rgba(0,0,0,0.4); /* Semi-transparent dark background for readability */
+  padding: 3rem 1rem;
+  text-align: center;
+  color: white;
+}
+
+.about-overlay h2 {
+  color: var(--gold);
+}
+
+.about-overlay .abou
