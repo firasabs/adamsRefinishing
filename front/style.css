@@ -1,15 +1,14 @@
-:root {
-  --gold: #CDA255;
-  --black: #000000;
-  --white: #FFFFFF;
-  --beige: #F8F4EC;      /* background alternative */
-  --text-dark: #1A1A1A;
-  --text-light: #EFEFEF;
+:root{
+  --gold:#CDA255; --black:#000; --white:#fff; --beige:#F8F4EC;
+  --text-dark:#1A1A1A; --text-light:#EFEFEF;
 }
-body {
-  background: var(--beige);
-  color: var(--dark);
-  font-family: "Noto Sans Hebrew", "Arial", sans-serif;
+
+body{
+  background:var(--beige);
+  color:var(--text-dark);
+  font-family:"Noto Sans Hebrew","Arial",sans-serif;
+  /* leave space for fixed header on mobile */
+  padding-top: calc(env(safe-area-inset-top, 0px) + 64px);
 }
 header {
   background: transparent;
@@ -26,14 +25,19 @@ header {
   transition: background-color 0.3s ease;
   font-family: "Noto Sans Hebrew", "Arial", sans-serif;
 }
-
+.logo-link {
+    text-decoration: none;
+    color: inherit; /* This makes the link inherit the color from its parent element */
+}
+.nav-toggle{
+  display:none; border:none; background:transparent; color:var(--gold);
+  font-size:1.6rem; line-height:1; padding:8px; margin-inline-start:12px;
+}
 header nav a:nth-child(1){ order: 3; } /* עבודות */
 header nav a:nth-child(2){ order: 1; } /* צור קשר */
 header nav a:nth-child(3){ order: 2; } /* קצת עלינו */
 
-header.scrolled {
-  background: var(--black); /* solid black after scroll */
-}
+header.scrolled{ background:var(--black); box-shadow:0 6px 18px rgba(0,0,0,.18); }
 .logo-container {
   display: flex;
   align-items: center;
@@ -101,13 +105,16 @@ header nav a:hover {
 .hero p{ color:#e8e8e8; margin:0 auto 18px; max-width: 720px; }
 
 /* buttons */
-.btn{ display:inline-flex; align-items:center; gap:.5rem; padding:12px 18px; border-radius:999px;
-      font-weight:700; text-decoration:none; transition:transform .15s, box-shadow .15s, background .15s; }
+.btn{ padding:12px 18px; border-radius:999px; font-weight:700; }
+
 .btn:hover{ transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.18); }
 .btn-solid{ background: var(--gold); color:#000; }
 .btn-outline{ color:#fff; border:1.5px solid rgba(255,255,255,.9); }
 .btn-outline:hover{ background:rgba(255,255,255,.1); }
-
+/* ---- Carousel / Before-After ---- */
+.slider-wrapper{ aspect-ratio: 16/10; }       /* a touch taller on phones */
+.handle{ width:3px; }
+.handle::after{ width:36px; height:36px; }
 /* typography sizes */
 @media (min-width: 768px){
   .hero{ min-height: 68vh; }
@@ -473,6 +480,7 @@ header nav a:nth-child(3){ order: 1; } /* צור קשר */
   text-decoration: none;
   border: 1px solid transparent;
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  will-change: transform;
 }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.12); }
 
@@ -523,22 +531,23 @@ header nav a:nth-child(3){ order: 1; } /* צור קשר */
 
 /* FOOTER */
 .site-footer {
-  background: var(--black);
-  color: var(--white);
+  background: transparent; /* Changed from black to dark gray */
+  color: var(--gold);
   padding: 16px 0;
   margin-top: 24px;
-  font-family: "Noto Sans Hebrew", "Arial", sans-serif;
+  font-family: 'Rubik', sans-serif;
+}
+.site-footer p {
+  margin: 0;
+  text-align: left; 
+  font-size: 0.9rem;
 }
 .footer-wrap {
   max-width: 1000px; margin: 0 auto; padding: 0 16px; text-align: center;
 }
-.site-footer p { margin: 0; }
-.video-background {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  z-index: -1;
-}
+
+.video-background{ position:fixed; inset:0; z-index:-1; pointer-events:none; }
+
 
 .video-background video {
   position: absolute;
@@ -549,6 +558,7 @@ header nav a:nth-child(3){ order: 1; } /* צור קשר */
   transform: translate(-50%, -50%);
   object-fit: cover;
 }
+.video-background video{ object-fit:cover; filter:brightness(.92); }
 
 
 .about-overlay {
@@ -564,4 +574,6 @@ header nav a:nth-child(3){ order: 1; } /* צור קשר */
   color: var(--gold);
 }
 
-.about-overlay .abou
+.about-overlay .about-text {
+  color: #fff;
+}

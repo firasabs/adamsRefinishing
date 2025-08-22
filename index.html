@@ -11,10 +11,12 @@
   
 <body>
   <header>
-    <div class="logo-container">
-      <img src="front/images/logo/trans_airgun.png" alt="Adam Painting Logo">
-      <h1>מצבעת אדם</h1>
-    </div>
+    <a href="index.html" class="logo-link">
+        <div class="logo-container">
+            <img src="front/images/logo/trans_airgun.png" alt="Adam Painting Logo">
+            <h1>מצבעת אדם</h1>
+        </div>
+    </a>
     <nav>
       <a href="#all-works">עבודות</a>
       <a href="#contact">צור קשר</a>
@@ -25,7 +27,6 @@
   </header>
 
   <section class="hero hero-video">
-  <!-- Background video -->
   <video
     class="hero-bg"
     autoplay
@@ -34,13 +35,10 @@
     playsinline
     preload="metadata"
     poster="images/kitchens/IMG_1930.jpeg">
-    <!-- Desktop (16:9) -->
     <source src="front/videos/heroBackground.mp4" type="video/mp4" media="(min-aspect-ratio: 4/3)">
-    <!-- Mobile portrait (9:16) -->
-    <source src="front/videos/heroBackground.mp4" type="video/mp4" media="(max-aspect-ratio: 3/4)">
+    <source src="front/videos/heroBackground_mobile.mp4" type="video/mp4" media="(max-aspect-ratio: 4/3)">
   </video>
 
-  <!-- Your existing content -->
   <section class="intro">
     <div class="hero-inner">
       <h2>צביעה וחידוש מטבחים ורהיטים</h2>
@@ -60,7 +58,6 @@
     <h3>חידוש</h3>
  
     <div class="carousel-container">
-      <!-- Slide 1 -->
       <div class="slide active">
         <div class="slider-wrapper">
           <img src="front/images/kitchens/before1.jpeg" class="before-img" alt="Before" />
@@ -73,7 +70,6 @@
         </div>
       </div>
 
-      <!-- Slide 2 -->
       <div class="slide">
         <div class="slider-wrapper">
           <img src="front/images/kitchens/before2.jpg" class="before-img" alt="Before" />
@@ -85,8 +81,7 @@
           </div>
         </div>
       </div>
-            <!-- Slide 3 -->
-      <div class="slide">
+            <div class="slide">
         <div class="slider-wrapper">
           <img src="front/images/doors/door1B_resized.jpg" class="before-img" alt="Before" />
           <div class="overlay">
@@ -97,9 +92,7 @@
           </div>
         </div>
       </div>
-    </div>
-          <!-- Slide 4 -->
-      <div class="slide">
+          <div class="slide">
         <div class="slider-wrapper">
           <img src="front/images/kitchens/ze1B.jpg" class="before-img" alt="Before" />
           <div class="overlay">
@@ -111,7 +104,6 @@
         </div>
       </div>
 
-    <!-- Pagination -->
     <div class="pagination">
       <span class="page-dot active" data-index="0">1</span>
       <span class="page-dot" data-index="1">2</span>
@@ -122,7 +114,6 @@
   <section class="full-gallery" id="all-works">
   <h2>כל העבודות</h2>
   
-  <!-- Filter buttons -->
   <div class="filter-buttons">
     <button data-filter="all" class="active">הצג הכל</button>
     <button data-filter="kitchen">מטבחים</button>
@@ -133,7 +124,6 @@
 
   </div>
 
-  <!-- Gallery grid -->
   <div class="work-grid">
     <div class="work-card"
         data-category="kitchen"
@@ -204,4 +194,77 @@
       <img src="front/images/rehet/reh1A.jpg" alt="Table Repaint">
       <p>צביעת מדף</p>
     </div>
-    
+        <div class="work-card" 
+        data-category="furniture"
+        data-title="חידוש מדרגות"
+        data-images="front/images/mad1.jpg,front/images/mad2.jpg ">
+      <img src="front/images/mad2.jpg" alt="stairs Repaint">
+      <p>חידוש מדרגות</p>
+    </div>
+    </div>
+</section>
+<div class="work-modal" id="workModal" aria-hidden="true">
+  <div class="work-modal__backdrop" data-close></div>
+  <div class="work-modal__content" role="dialog" aria-modal="true">
+    <button class="work-modal__close" title="סגור" data-close>&times;</button>
+
+    <h3 class="work-modal__title"></h3>
+    <p class="work-modal__desc"></p>
+
+    <div class="work-modal__viewer">
+      <button class="nav prev" aria-label="הקודם">&#10094;</button>
+      <img class="work-modal__image" src="" alt="">
+      <button class="nav next" aria-label="הבא">&#10095;</button>
+    </div>
+
+    <div class="work-modal__thumbs"></div>
+  </div>
+</div>
+
+
+<section class="contact" id="contact">
+  <div class="contact-wrap">
+    <div class="contact-card">
+      <h2>צור קשר</h2>
+      <p class="subtitle" >נשמח לייעוץ חינם והצעת מחיר</p>
+
+      <div class="contact-actions">
+        <a class="btn tel-btn" href="tel:+972527245614" aria-label="התקשרו למצבעת אדם">
+          <span class="icon" aria-hidden="true">📞</span>
+          052‑553‑7552
+        </a>
+        <a class="btn wa-btn" href="https://wa.me/972525537552" target="_blank" rel="noopener" aria-label="פתיחת שיחת WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+          WhatsApp
+        </a>
+
+      </div>
+
+      <div class="contact-meta">
+        <div class="meta-item" dir="rtl">
+          <strong>אזור עבודה:</strong>
+          <span>צפון–מרכז (הגעה עד בית הלקוח)</span>
+        </div>
+      </div>
+
+      <div class="chip-list">
+        <span class="chip">חידוש מטבחים</span>
+        <span class="chip">צביעת דלתות</span>
+        <span class="chip">רהיטים עץ מלא</span>
+        <span class="chip">צביעה בתנור</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <p>© 2025 מצבעת אדם. כל הזכויות שמורות.</p>
+    <p class="developer-credit"> <a href="https://github.com/firasabs" target="_blank">firasabs</a>נבנה ועוצב ע״י </p>
+  </div>
+</footer>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
