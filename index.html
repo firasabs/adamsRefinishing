@@ -6,7 +6,6 @@
   <title>מצבעת אדם | Adam Painting</title>
   <link rel="stylesheet" href="front/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
 </head>
   
 <body>
@@ -51,66 +50,60 @@
     </div>
   </section>
 </section>
+<section class="gallery-section" id="gallery">
+  <h2>לפני ואחרי</h2>
+  
 
-
-  <section class="gallery-section" id="gallery">
-    <h2>לפני ואחרי </h2>
-    <h3>חידוש</h3>
- 
-    <div class="carousel-container">
-      <div class="slide active">
-        <div class="slider-wrapper">
-          <img src="front/images/kitchens/before1.jpeg" class="before-img" alt="Before" />
-          <div class="overlay">
-            <img src="front/images/kitchens/after1.jpg" alt="After" />
-          </div>
-          <div class="handle">
-            <span class="arrows">↔</span>
-          </div>
+    <!-- Slider 1 -->
+    <div class="comparison-slider-wrapper">
+      <div class="comparison-slider">
+        <div class="overlay">אחרי</div>
+        <img src="front/images/kitchens/after1.jpg" alt="after1">
+        <div class="resize">
+          <div class="overlay">לפני</div>
+          <img src="front/images/kitchens/before1.jpeg" alt="before1">
         </div>
+        <div class="divider"></div>
       </div>
-
-      <div class="slide">
-        <div class="slider-wrapper">
-          <img src="front/images/kitchens/before2.jpg" class="before-img" alt="Before" />
-          <div class="overlay">
-            <img src="front/images/kitchens/after2.jpg" alt="After" />
-          </div>
-          <div class="handle">
-            <span class="arrows">↔</span>
-          </div>
-        </div>
-      </div>
-            <div class="slide">
-        <div class="slider-wrapper">
-          <img src="front/images/doors/door1B_resized.jpg" class="before-img" alt="Before" />
-          <div class="overlay">
-            <img src="front/images/doors/door1A_resized.jpg" alt="After" />
-          </div>
-          <div class="handle">
-            <span class="arrows">↔</span>
-          </div>
-        </div>
-      </div>
-          <div class="slide">
-        <div class="slider-wrapper">
-          <img src="front/images/kitchens/ze1B.jpg" class="before-img" alt="Before" />
-          <div class="overlay">
-            <img src="front/images/kitchens/ze1.jpg" alt="After" />
-          </div>
-          <div class="handle">
-            <span class="arrows">↔</span>
-          </div>
-        </div>
-      </div>
-
-    <div class="pagination">
-      <span class="page-dot active" data-index="0">1</span>
-      <span class="page-dot" data-index="1">2</span>
-      <span class="page-dot" data-index="2">3</span>
-      <span class="page-dot" data-index="3">4</span>
     </div>
-  </section>
+    <!-- Slider 2 -->
+    <div class="comparison-slider-wrapper">
+      <div class="comparison-slider">
+        <div class="overlay">אחרי</div>
+        <img src="front/images/kitchens/after2.jpg" alt="after2">
+        <div class="resize">
+          <div class="overlay">לפני</div>
+          <img src="front/images/kitchens/before2.jpg" alt="before2">
+        </div>
+        <div class="divider"></div>
+      </div>
+    </div>
+
+  <!-- Slider 3 -->
+  <div class="comparison-slider-wrapper">
+    <div class="comparison-slider">
+      <div class="overlay">אחרי</div>
+      <img src="front/images/doors/door1A_resized.jpg" alt="door after">
+      <div class="resize">
+        <div class="overlay">לפני</div>
+        <img src="front/images/doors/door1B_resized.jpg" alt="door before">
+      </div>
+      <div class="divider"></div>
+    </div>
+  </div>
+    <!-- Slider 4 -->
+  <div class="comparison-slider-wrapper">
+    <div class="comparison-slider">
+      <div class="overlay">אחרי</div>
+      <img src="front/images/kitchens/ze1B.jpg" alt="kitchen after">
+      <div class="resize">
+        <div class="overlay">לפני</div>
+        <img src="front/images/kitchens/ze1.jpg" alt="kitchen before">
+      </div>
+      <div class="divider"></div>
+    </div>
+  </div>
+</section>
   <section class="full-gallery" id="all-works">
   <h2>כל העבודות</h2>
   
@@ -264,7 +257,10 @@
   </div>
 </footer>
 
-
-  <script src="script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.event.move/2.0.0/jquery.event.move.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twentytwenty/1.0.0/jquery.twentytwenty.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.0.7/js/swiper.jquery.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

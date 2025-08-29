@@ -1,94 +1,5 @@
-const dots = document.querySelectorAll('.page-dot');
-const slides = document.querySelectorAll('.slide');
-
-dots.forEach(dot => {
-  dot.addEventListener('click', () => {
-    const index = parseInt(dot.dataset.index);
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(d => d.classList.remove('active'));
-    slides[index].classList.add('active');
-    dot.classList.add('active');
-  });
-});
-
-// Before/after handle drag functionality with polish
-document.querySelectorAll('.slider-wrapper').forEach((wrapper, idx) => {
-  const overlay = wrapper.querySelector('.overlay');
-  const handle = wrapper.querySelector('.handle');
-
-  let isDragging = false;
-
-  // one-time hint on the first slider only
-  if (idx === 0) {
-    wrapper.classList.add('hint');
-    setTimeout(() => wrapper.classList.remove('hint'), 2000);
-  }
-
-  const setX = (clientX) => {
-    const rect = wrapper.getBoundingClientRect();
-    let x = clientX - rect.left;
-    x = Math.max(0, Math.min(x, rect.width));
-    overlay.style.width = `${x}px`;
-    handle.style.left = `${x}px`;
-  };
-
-  // mouse
-  handle.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    wrapper.classList.add('dragging');
-    e.preventDefault();
-  });
-  window.addEventListener('mouseup', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    wrapper.classList.remove('dragging');
-
-    // snap to neat positions (40%, 50%, 60%) on release
-    const rect = wrapper.getBoundingClientRect();
-    const x = parseFloat(handle.style.left || '50%') / 100 * rect.width || parseFloat(handle.style.left);
-    const pct = x / rect.width;
-    const targets = [0.4, 0.5, 0.6];
-    const nearest = targets.reduce((a,b)=> Math.abs(b-pct) < Math.abs(a-pct) ? b : a, targets[0]);
-    overlay.style.width = `${nearest*rect.width}px`;
-    handle.style.left = `${nearest*rect.width}px`;
-  });
-  window.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    setX(e.clientX);
-  });
-
-  // touch
-  handle.addEventListener('touchstart', (e) => {
-    isDragging = true;
-    wrapper.classList.add('dragging');
-  }, {passive:true});
-  window.addEventListener('touchend', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    wrapper.classList.remove('dragging');
-  }, {passive:true});
-  window.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    setX(e.touches[0].clientX);
-  }, {passive:true});
-
-  // keyboard support when focused (accessibility)
-  handle.setAttribute('tabindex', '0');
-  handle.addEventListener('keydown', (e) => {
-    const rect = wrapper.getBoundingClientRect();
-    const cur = parseFloat(overlay.style.width) || rect.width/2;
-    const step = rect.width * 0.08; // 8%
-    if (e.key === 'ArrowRight') {
-      overlay.style.width = `${Math.min(rect.width, cur + step)}px`;
-      handle.style.left = overlay.style.width;
-    } else if (e.key === 'ArrowLeft') {
-      overlay.style.width = `${Math.max(0, cur - step)}px`;
-      handle.style.left = overlay.style.width;
-    }
-  });
-});
-
-
+// Remove this section as it is for the old, custom slider.
+// document.querySelectorAll('.slider-wrapper').forEach((wrapper, idx) => { ... });
 
 
 const filterButtons = document.querySelectorAll('.filter-buttons button');
@@ -228,3 +139,92 @@ window.addEventListener('scroll', () => {
     header.classList.remove('scrolled');
   }
 });
+// init comparison sliders (jQuery)
+$(function () {
+  const $sliders = $(".comparison-slider");
+  if (!$sliders.length) return;
+
+  // init each slider
+  $sliders.each(function () {
+    const $slider = $(this);
+    const $resize = $slider.find(".resize");
+    const $divider = $slider.find(".divider");
+
+    // set the top image width to match container width
+    const setWidths = () => {
+      const w = $slider.width() + "px";
+      $resize.find("img").css({ width: w });
+    };
+    setWidths();
+
+    // center on first paint
+    requestAnimationFrame(() => {
+      $resize.css("width", "50%");
+      $divider.css("left", "50%");
+    });
+
+    // drag behavior
+    drags($divider, $resize, $slider);
+  });
+
+  // update on resize/orientation
+  $(window).on("resize", function () {
+    $(".comparison-slider").each(function () {
+      const $slider = $(this);
+      const $resize = $slider.find(".resize");
+      const w = $slider.width() + "px";
+      $resize.find("img").css({ width: w });
+      // keep divider centered after resize
+      $resize.css("width", "50%");
+      $slider.find(".divider").css("left", "50%");
+    });
+  });
+});
+
+// unchanged helper from your example
+function drags(dragElement, resizeElement, container) {
+  let touched = false;
+  window.addEventListener('touchstart', () => touched = true);
+  window.addEventListener('touchend',   () => touched = false);
+
+  dragElement.on("mousedown touchstart", function (e) {
+    dragElement.addClass("draggable");
+    resizeElement.addClass("resizable");
+
+    const pageX = e.pageX ? e.pageX : e.originalEvent.touches[0].pageX;
+    const dragWidth = dragElement.outerWidth();
+    const posX = dragElement.offset().left + dragWidth - pageX;
+    const containerOffset = container.offset().left;
+    const containerWidth = container.outerWidth();
+    const minLeft = containerOffset + 10;
+    const maxLeft = containerOffset + containerWidth - dragWidth - 10;
+
+    dragElement.parents().on("mousemove touchmove", function (e) {
+      if (!touched) e.preventDefault();
+
+      const moveX = e.pageX ? e.pageX : e.originalEvent.touches[0].pageX;
+      let leftValue = moveX + posX - dragWidth;
+
+      if (leftValue < minLeft) leftValue = minLeft;
+      else if (leftValue > maxLeft) leftValue = maxLeft;
+
+      const widthValue = (leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth + "%";
+
+      $(".draggable")
+        .css("left", widthValue)
+        .on("mouseup touchend touchcancel", function () {
+          $(this).removeClass("draggable");
+          resizeElement.removeClass("resizable");
+        });
+
+      $(".resizable").css("width", widthValue);
+    }).on("mouseup touchend touchcancel", function () {
+      dragElement.removeClass("draggable");
+      resizeElement.removeClass("resizable");
+    });
+  }).on("mouseup touchend touchcancel", function () {
+    dragElement.removeClass("draggable");
+    resizeElement.removeClass("resizable");
+  });
+}
+

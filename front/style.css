@@ -10,19 +10,17 @@ body{
   /* leave space for fixed header on mobile */
   padding-top: calc(env(safe-area-inset-top, 0px) + 64px);
 }
-header {
-  background: transparent;
+header{
   position: fixed;
-  width: 95%;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  color: var(--gold);
-  padding: 1rem 2rem;
+  top: 0; left: 0; right: 0;
+  height: 64px;                 /* adjust to your header height */
   display: flex;
-  justify-content: space-between; /* logo left, nav right */
   align-items: center;
-  transition: background-color 0.3s ease;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: transparent;      /* key: sits on top of video */
+  color: var(--gold);
+  z-index: 1000;                /* above hero/video */
   font-family: "Noto Sans Hebrew", "Arial", sans-serif;
 }
 .logo-link {
@@ -73,10 +71,6 @@ header nav a:hover {
 }
 
 
-.gallery-section {
-  text-align: center;
-  padding: 2rem;
-}
 /* ---- HERO base ---- */
 .hero{
   position: relative;
@@ -127,7 +121,7 @@ header nav a:hover {
   display: grid;
   place-items: center;
   padding: 0 16px;
-  text-align: center;           /* מרכז טקסט וכפתורים */
+  text-align: center;         
 }
 
 .hero-inner{
@@ -186,125 +180,99 @@ p {
   color: #555;
 }
 
-.carousel-container {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 10px;
-}
+/* Container & headings (optional) */
+.gallery-section { padding: 32px 16px; }
 
-.slide {
-  display: none;
-  width: 100%;
-  height: auto;
-}
-
-.slide.active {
-  display: block;
-}
-
-.slider-wrapper {
+/* One slider wrapper */
+.comparison-slider-wrapper {
   position: relative;
   width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  background: transparent;
+}
+
+/* The comparison slider frame */
+.comparison-slider {
+  position: relative;
+  width: 100%;
+  /* lock a stable height */
   aspect-ratio: 16 / 9;
-  overflow: hidden;
   border-radius: 12px;
+  overflow: hidden;
   box-shadow: 0 12px 30px rgba(0,0,0,.12);
-  background:#000;
+  background: #000;
 }
 
-.before-img,
-.overlay img {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* Base image (after) */
+.comparison-slider > img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ensures perfect alignment */
+  object-fit: cover;
 }
 
-.overlay {
+/* Label “לפני/אחרי” */
+.comparison-slider .overlay {
+  display: none; /* show only on tablet+ if you want */
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%; /* start pivot in center */
-  height: 100%;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(0,0,0,.4);
+  color: #ddd;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+/* The “before” half on top */
+.comparison-slider .resize {
+  position: absolute;
+  top: 0; left: 0; height: 100%;
+  width: 50%;                  /* start in the middle */
   overflow: hidden;
 }
-
-.handle {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 3px;
+.comparison-slider .resize > img {
+  display: block;
+  width: 100%;
   height: 100%;
-  background: #CDA255; /* gold */
-  z-index: 10;
+  object-fit: cover;
+}
+.comparison-slider .resize .overlay {
+  left: 16px; right: auto;     /* label on left for "before" */
+}
+
+/* The draggable divider */
+.comparison-slider .divider {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;                   /* align with .resize width */
+  width: 2px;
+  background: rgba(255,255,255,.35);
   cursor: ew-resize;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.handle::after{
-  content:"";
-  position:absolute;
-  left:50%; top:50%;
-  translate:-50% -50%;
-  width:40px; height:40px;
-  border-radius:50%;
-  background:var(--gold);
-  box-shadow:0 4px 16px rgba(0,0,0,.25), inset 0 0 0 2px rgba(0,0,0,.1);
+.comparison-slider .divider::before,
+.comparison-slider .divider::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #fff;
+  transition: all .1s ease-in-out;
 }
-
-.arrows {
-  color:#1a1a1a;
-  position:absolute; inset:0; display:grid; place-items:center;
-  font-size: 1.5rem;
-  transform: rotate(0deg);
-  user-select: none;
+.comparison-slider .divider::before { width: 20px; height: 20px; top: 50%; }
+.comparison-slider .divider::after  { width: 12px; height: 12px; top: 50%; }
+.comparison-slider .divider.draggable::before {
+  width: 30px; height: 30px;
 }
-.slider-wrapper:not(.dragging) .overlay{ transition: width .35s ease; }
-.slider-wrapper:not(.dragging) .handle{ transition: left .35s ease; }
-@keyframes slider-nudge {
-  0%   { left: 50%; }
-  30%  { left: 40%; }
-  60%  { left: 60%; }
-  100% { left: 50%; }
-}
-.slider-wrapper.hint .handle { animation: slider-nudge 1.8s ease; }
-.slide.active .slider-wrapper{
-  animation: slideIn .35s ease both;
-}
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(10px) scale(.995); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-} 
-
-.pagination {
-  margin-top: 1rem;
+.comparison-slider .divider.draggable::after {
+  width: 20px; height: 20px; background: #555;
 }
 
-.page-dot {
-  display: inline-block;
-  background: #ccc;
-  color: var(--green);
-  padding: 5px 10px;
-  margin: 0 5px;
-  border-radius: 6px;
-  cursor: pointer;
-  user-select:none;
+/* Touch/selection quality-of-life */
+.comparison-slider img { user-select: none; pointer-events: none; }
+.comparison-slider .divider { touch-action: none; }
 
-}
-
-.page-dot.active {
-  background: var(--gold);
-  color: black;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0,0,0,.12);
-  border: 1px solid rgba(0,0,0,.06);
-}
 .full-gallery {
   padding: 3rem 1rem;
   background: var(--white);
