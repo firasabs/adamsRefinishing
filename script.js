@@ -227,4 +227,68 @@ function drags(dragElement, resizeElement, container) {
     resizeElement.removeClass("resizable");
   });
 }
+// ----- Carousel around comparison sliders -----
+(function() {
+  const slides = Array.from(document.querySelectorAll('.carousel-container .slide'));
+  const dots   = Array.from(document.querySelectorAll('.pagination .page-dot'));
+  const prev   = document.querySelector('.carousel-controls .prev');
+  const next   = document.querySelector('.carousel-controls .next');
 
+  if (!slides.length) return;
+
+  let current = 0;
+
+  function recenterSlide(slideEl) {
+    const slider = slideEl.querySelector('.comparison-slider');
+    if (!slider) return;
+    const resize = slider.querySelector('.resize');
+    const divider = slider.querySelector('.divider');
+
+    // match top image width to container (same logic as init)
+    const w = slider.clientWidth + 'px';
+    const imgTop = resize.querySelector('img');
+    if (imgTop) imgTop.style.width = w;
+
+    // center the split
+    resize.style.width = '50%';
+    divider.style.left = '50%';
+  }
+
+  function show(index) {
+    // clamp/loop
+    if (index < 0) index = slides.length - 1;
+    if (index >= slides.length) index = 0;
+    current = index;
+
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+
+    const active = slides[current];
+    active.classList.add('active');
+    if (dots[current]) dots[current].classList.add('active');
+
+    // give the browser a tick to layout, then recenter
+    requestAnimationFrame(() => recenterSlide(active));
+  }
+
+  // dot clicks
+  dots.forEach(d => {
+    d.addEventListener('click', () => show(parseInt(d.dataset.index, 10)));
+  });
+
+  // arrows
+  if (prev) prev.addEventListener('click', () => show(current - 1));
+  if (next) next.addEventListener('click', () => show(current + 1));
+
+  // keyboard (when gallery is in view)
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft')  show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  // keep centered on resize/orientation
+  window.addEventListener('resize', () => recenterSlide(slides[current]));
+
+  // initial
+  show(current);
+})();

@@ -179,10 +179,53 @@ p {
   margin: 0 auto 2rem;
   color: #555;
 }
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.slide { display: none; }
+.slide.active { display: block; }
 
+/* Controls */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  margin-top: .75rem;
+}
+.carousel-controls .prev,
+.carousel-controls .next {
+  border: 0;
+  background: var(--gold, #CDA255);
+  color: #000;
+  padding: .4rem .7rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Dots (you already had similar) */
+.pagination .page-dot {
+  display: inline-block;
+  background:var(--black);
+  color: var(--beige);
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+.pagination .page-dot.active {
+  background: var(--gold, #CDA255);
+  color: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,.12);
+  border: 1px solid rgba(0,0,0,.06);
+}
 /* Container & headings (optional) */
 .gallery-section { padding: 32px 16px; }
-
 /* One slider wrapper */
 .comparison-slider-wrapper {
   position: relative;
@@ -257,7 +300,7 @@ p {
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
-  background: #fff;
+  background: var(--gold);
   transition: all .1s ease-in-out;
 }
 .comparison-slider .divider::before { width: 20px; height: 20px; top: 50%; }
@@ -266,7 +309,7 @@ p {
   width: 30px; height: 30px;
 }
 .comparison-slider .divider.draggable::after {
-  width: 20px; height: 20px; background: #555;
+  width: 20px; height: 20px; background: var(--black);
 }
 
 /* Touch/selection quality-of-life */
