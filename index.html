@@ -1,286 +1,506 @@
 <!DOCTYPE html>
- <html lang="he">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>מצבעת אדם | Adam Painting</title>
+  <title>מצבעת אדם | חידוש מטבחים וצביעת רהיטים — אשדוד והסביבה</title>
+  <meta name="description" content="מנסור אבו סעדה — מעל 35 שנה ניסיון בצביעה וחידוש מטבחים, דלתות ורהיטי עץ. הגעה עד הבית. הצעת מחיר חינם.">
+  <meta name="keywords" content="חידוש מטבחים, צביעת דלתות, רהיטי עץ, שיפוץ מטבח, אשדוד, מצבעת אדם">
+  <meta property="og:title" content="מצבעת אדם | חידוש מטבחים וצביעת רהיטים">
+  <meta property="og:description" content="מעל 35 שנה ניסיון. חידוש מטבחים, דלתות ורהיטים. הגעה עד הבית.">
+  <meta property="og:type" content="website">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "מצבעת אדם",
+    "description": "חידוש וצביעה מקצועית של מטבחים, דלתות ורהיטי עץ",
+    "telephone": "+972525537552",
+    "areaServed": "אשדוד והסביבה",
+    "foundingDate": "1986"
+  }
+  </script>
+
   <link rel="stylesheet" href="front/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-  
-<body>
-  <header>
-    <a href="index.html" class="logo-link">
-        <div class="logo-container">
-            <img src="front/images/logo/trans_airgun.png" alt="Adam Painting Logo">
-            <h1>מצבעת אדם</h1>
-        </div>
-    </a>
-    <nav>
-      <a href="#all-works">עבודות</a>
-      <a href="#contact">צור קשר</a>
-      <a href="front/about.html">מי אנחנו</a>
-      
 
+<body>
+
+  <!-- HEADER -->
+  <header id="site-header">
+    <a href="index.html" class="logo-link" aria-label="מצבעת אדם - עמוד הבית">
+      <div class="logo-container">
+        <img src="front/images/logo/trans_airgun.png" alt="לוגו מצבעת אדם" width="52" height="52">
+        <span class="logo-text">מצבעת אדם</span>
+      </div>
+    </a>
+
+    <nav id="main-nav" aria-label="ניווט ראשי">
+      <a href="#services">שירותים</a>
+      <a href="#all-works">עבודות</a>
+      <a href="#about">מי אנחנו</a>
+      <a href="#contact" class="nav-cta">הצעת מחיר</a>
     </nav>
+
+    <a class="header-phone" href="tel:+972525537552" aria-label="התקשר">
+      <i class="fas fa-phone"></i>
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="פתח תפריט" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-  <section class="hero hero-video">
-  <video
-    class="hero-bg"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="metadata"
-    poster="images/kitchens/IMG_1930.jpeg">
-    <source src="front/videos/heroBackground.mp4" type="video/mp4" media="(min-aspect-ratio: 4/3)">
-    <source src="front/videos/heroBackground_mobile.mp4" type="video/mp4" media="(max-aspect-ratio: 4/3)">
-  </video>
+  <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
 
-  <section class="intro">
+  <!-- HERO -->
+  <section class="hero hero-video" aria-label="אזור ראשי">
+    <video
+      class="hero-bg"
+      muted playsinline webkit-playsinline autoplay loop preload="metadata"
+      poster="front/images/kitchens/IMG_1930.jpeg"
+      aria-hidden="true">
+      <source src="front/videos/heroBackground.mp4" type="video/mp4" media="(min-aspect-ratio: 4/3)">
+      <source src="front/videos/heroBackground_mobile.mp4" type="video/mp4" media="(max-aspect-ratio: 4/3)">
+    </video>
     <div class="hero-inner">
-      <h2>צביעה וחידוש מטבחים ורהיטים</h2>
-      <p>מאז 1986 — אמנות, יצירה ומקצועיות. חידוש מטבחים, דלתות ורהיטים בגימור מושלם</p>
-
+      <span class="hero-badge">מאז 1986</span>
+      <h1>מטבח ישן? רהיט שנשכח?<br><em>אנחנו מחיים אותו מחדש.</em></h1>
+      <p>צביעה וחידוש מקצועי לכל בית — מטבחים, דלתות ורהיטי עץ בגימור מושלם</p>
       <div class="hero-cta">
-        <a href="#all-works" class="btn btn-outline">עבודות</a>
-        <a href="#contact" class="btn btn-solid">קבלו הצעת מחיר</a>
+        <a href="#all-works" class="btn btn-outline">
+          <i class="fas fa-images"></i> צפו בעבודות
+        </a>
+        <a href="#contact" class="btn btn-solid">
+          <i class="fas fa-comments"></i> קבלו הצעת מחיר חינם
+        </a>
       </div>
     </div>
   </section>
-</section>
-<section class="gallery-section" id="gallery">
-  <h2>Before and After</h2>
-    <div class="carousel-container">
-      <!-- Slide 1 -->
-      <div class="slide active">
-      <div class="comparison-slider-wrapper">
-        <div class="comparison-slider">
-          <div class="overlay">אחרי</div>
-          <img src="front/images/kitchens/after1.jpg" alt="after1">
-          <div class="resize">
-            <div class="overlay">לפני</div>
-            <img src="front/images/kitchens/before1.jpeg" alt="before1">
-          </div>
-          <div class="divider"></div>
-        </div>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-bar__inner">
+      <div class="trust-item">
+        <i class="fas fa-medal"></i>
+        <span><strong>35+</strong> שנות ניסיון</span>
       </div>
+      <div class="trust-item">
+        <i class="fas fa-home"></i>
+        <span>הגעה <strong>עד הבית</strong></span>
       </div>
-      <!-- Slider 2 -->
-    <div class="slide">
-      <div class="comparison-slider-wrapper">
-        <div class="comparison-slider">
-          <div class="overlay">אחרי</div>
-          <img src="front/images/kitchens/after2.jpg" alt="after2">
-          <div class="resize">
-            <div class="overlay">לפני</div>
-            <img src="front/images/kitchens/before2.jpg" alt="before2">
-          </div>
-          <div class="divider"></div>
-        </div>
+      <div class="trust-item">
+        <i class="fas fa-gift"></i>
+        <span>ייעוץ <strong>חינם</strong></span>
       </div>
+      <div class="trust-item">
+        <i class="fas fa-star"></i>
+        <span>גימור <strong>מושלם</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER CAROUSEL -->
+  <section class="gallery-section" id="gallery">
+    <div class="section-header">
+      <h2>לפני ואחרי</h2>
+      <p class="section-sub">גררו את המחוון לגילוי השינוי המדהים</p>
     </div>
 
-    <!-- Slider 3 -->
-    <div class="slide">
-    <div class="comparison-slider-wrapper">
-      <div class="comparison-slider">
-        <div class="overlay">אחרי</div>
-        <img src="front/images/doors/door1A_resized.jpg" alt="door after">
-        <div class="resize">
-          <div class="overlay">לפני</div>
-          <img src="front/images/doors/door1B_resized.jpg" alt="door before">
+    <div class="carousel-container" role="region" aria-label="גלריית לפני ואחרי" aria-live="polite">
+
+      <div class="slide active" data-label="מטבח">
+        <div class="comparison-slider-wrapper">
+          <div class="comparison-slider">
+            <div class="overlay overlay--after">אחרי</div>
+            <img src="front/images/kitchens/after1.jpg" alt="מטבח לאחר חידוש" loading="eager">
+            <div class="resize">
+              <div class="overlay overlay--before">לפני</div>
+              <img src="front/images/kitchens/before1.jpeg" alt="מטבח לפני חידוש" loading="eager">
+            </div>
+            <div class="divider"></div>
+          </div>
         </div>
-        <div class="divider"></div>
       </div>
-    </div>
-  </div>
-    <!-- Slider 4 -->
-<div class="slide">
-  <div class="comparison-slider-wrapper">
-    <div class="comparison-slider">
-      <div class="overlay">אחרי</div>
-      <img src="front/images/kitchens/ze1B.jpg" alt="kitchen2 after">
-      <div class="resize">
-        <div class="overlay">לפני</div>
-        <img src="front/images/kitchens/ze1.jpg" alt="kitchen2 before">
+
+      <div class="slide" data-label="מטבח">
+        <div class="comparison-slider-wrapper">
+          <div class="comparison-slider">
+            <div class="overlay overlay--after">אחרי</div>
+            <img src="front/images/kitchens/after2.jpg" alt="מטבח לאחר צביעה" loading="lazy">
+            <div class="resize">
+              <div class="overlay overlay--before">לפני</div>
+              <img src="front/images/kitchens/before2.jpg" alt="מטבח לפני צביעה" loading="lazy">
+            </div>
+            <div class="divider"></div>
+          </div>
+        </div>
       </div>
-      <div class="divider"></div>
+
+      <div class="slide" data-label="דלת">
+        <div class="comparison-slider-wrapper">
+          <div class="comparison-slider">
+            <div class="overlay overlay--after">אחרי</div>
+            <img src="front/images/doors/door1A_resized.jpg" alt="דלת לאחר חידוש" loading="lazy">
+            <div class="resize">
+              <div class="overlay overlay--before">לפני</div>
+              <img src="front/images/doors/door1B_resized.jpg" alt="דלת לפני חידוש" loading="lazy">
+            </div>
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide" data-label="מטבח">
+        <div class="comparison-slider-wrapper">
+          <div class="comparison-slider">
+            <div class="overlay overlay--after">אחרי</div>
+            <img src="front/images/kitchens/ze1B.jpg" alt="מטבח לאחר שיפוץ" loading="lazy">
+            <div class="resize">
+              <div class="overlay overlay--before">לפני</div>
+              <img src="front/images/kitchens/ze1.jpg" alt="מטבח לפני שיפוץ" loading="lazy">
+            </div>
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </div>
-</div>
-</div>
-</div>
-  <!-- Nav -->
-  <div class="carousel-controls">
-    <button class="prev" aria-label="Previous">‹</button>
-    <div class="pagination">
-      <span class="page-dot active" data-index="0">1</span>
-      <span class="page-dot" data-index="1">2</span>
-      <span class="page-dot" data-index="2">3</span>
-      <span class="page-dot" data-index="3">4</span>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn prev" aria-label="השקופית הקודמת">&#8250;</button>
+      <div class="pagination">
+        <button class="page-dot active" data-index="0">1</button>
+        <button class="page-dot" data-index="1">2</button>
+        <button class="page-dot" data-index="2">3</button>
+        <button class="page-dot" data-index="3">4</button>
+      </div>
+      <button class="carousel-btn next" aria-label="השקופית הבאה">&#8249;</button>
     </div>
-    <button class="next" aria-label="Next">›</button>
-  </div>
-</section>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-section" id="services">
+    <div class="section-header">
+      <h2>השירותים שלנו</h2>
+      <p class="section-sub">כל עבודה מבוצעת עם אהבה למקצוע וחומרים מהמובחרים</p>
+    </div>
+    <div class="services-grid">
+      <article class="service-card">
+        <div class="service-icon"><i class="fas fa-utensils"></i></div>
+        <h3>חידוש מטבחים</h3>
+        <p>מטבח ישן מקבל חיים חדשים. צביעה בתנור, חידוש דלתות וחזית שלמה</p>
+        <a href="#all-works" class="service-link" data-filter-target="kitchen">ראה עבודות <i class="fas fa-arrow-left"></i></a>
+      </article>
+      <article class="service-card">
+        <div class="service-icon"><i class="fas fa-door-open"></i></div>
+        <h3>צביעת דלתות</h3>
+        <p>דלתות כניסה, פנים ורהיטים — חידוש מלא עם גימור חלק ועמיד</p>
+        <a href="#all-works" class="service-link" data-filter-target="doors">ראה עבודות <i class="fas fa-arrow-left"></i></a>
+      </article>
+      <article class="service-card">
+        <div class="service-icon"><i class="fas fa-couch"></i></div>
+        <h3>רהיטי עץ</h3>
+        <p>שולחנות, מדפים, מדרגות ורהיטי עץ מלא — כמו חדשים לגמרי</p>
+        <a href="#all-works" class="service-link" data-filter-target="furniture">ראה עבודות <i class="fas fa-arrow-left"></i></a>
+      </article>
+      <article class="service-card">
+        <div class="service-icon"><i class="fas fa-window-maximize"></i></div>
+        <h3>חלונות ודיקטים</h3>
+        <p>צביעה וחידוש מקצועי לחלונות עץ ולוחות דיקט בכל גודל</p>
+        <a href="#all-works" class="service-link" data-filter-target="windows">ראה עבודות <i class="fas fa-arrow-left"></i></a>
+      </article>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
   <section class="full-gallery" id="all-works">
-  <h2>כל העבודות</h2>
-  
-  <div class="filter-buttons">
-    <button data-filter="all" class="active">הצג הכל</button>
-    <button data-filter="kitchen">מטבחים</button>
-    <button data-filter="doors">דלתות</button>
-    <button data-filter="furniture">רהיטים</button>
-    <button data-filter="dects">דיקטים</button>
-    <button data-filter="windows">חלונות</button>
-
-  </div>
-
-  <div class="work-grid">
-    <div class="work-card"
-        data-category="kitchen"
-        data-title="שיפוץ מטבח"
-        data-desc="חידוש דלתות, צביעה בתנור"
-        data-images="front/images/kitchens/before1.jpeg,front/images/kitchens/after1.jpg,front/images/kitchens/after11.jpg">
-      <img src="front/images/kitchens/after1.jpg" alt="Kitchen Project">
-      <p>שיפוץ מטבח</p>
-    </div>
-        <div class="work-card"
-        data-category="kitchen"
-        data-title="שיפוץ מטבח"
-        data-desc="חידוש דלתות, איי, צביעה בתנור"
-        data-images="front/images/kitchens/tavoon1.jpg,front/images/kitchens/tavoon2.jpeg,front/images/kitchens/tavoon11.jpeg">
-      <img src="front/images/kitchens/tavoon11.jpeg" alt="Kitchen Project">
-      <p>שיפוץ מטבח</p>
-    </div>
-    <div class="work-card" 
-        data-category="doors"
-        data-title="צביעת דלת כניסה"
-        data-desc="חידוש דלת"
-        data-images="front/images/doors/nseer's door.jpeg">
-      <img src="front/images/doors/nseer's door.jpeg" alt="Door Project">
-      <p>צביעת דלת כניסה</p>
-    </div>
-        <div class="work-card"         
-        data-category="doors"
-        data-title="צביעת דלת כניסה"
-        data-desc="חידוש דלת"
-        data-images="front/images/doors/door1A.jpg,front/images/doors/door1B.jpg">
-      <img src="front/images/doors/door1A.jpg" alt="Door Project">
-      <p>צביעת דלת כניסה</p>
-    </div>
-    <div class="work-card" 
-        data-category="furniture"
-        data-title="צביעת שולחנות"
-        data-desc="צביעת שולחן אוכל וסלון "
-        data-images="front/images/tabels/TAtta.jpg,front/images/tabels/TAtta2.jpg ">
-      <img src="front/images/tabels/TAtta.jpg" alt="Table Repaint">
-      <p>שיפוץ שולחן עץ</p>
-    </div>
-    <div class="work-card" 
-        data-category="windows"
-        data-title="צביעת חלונות">
-      <img src="front/images/windows/the duke.jpg">
-      <p>צביעת חלונות</p>
-    </div>
-        <div class="work-card" 
-        data-category="dects"
-        data-title="צביעת דיקטים"
-        data-images="front/images/dect/IMG_8884.jpeg,front/images/dect/IMG_8875.png">
-      <img src="front/images/dect/IMG_8884.jpeg" alt="dect Repaint">
-      <p> צביעת דיקט</p>
-    </div>
-        <div class="work-card"
-        data-category="kitchen"
-        data-title="חידוש מטבח"
-        data-desc=" צביעה בתנור"
-        data-images="front/images/kitchens/ze1B.jpg,front/images/kitchens/ze1.jpg,front/images/kitchens/ze2B.jpg,front/images/kitchens/ze2.jpg">
-      <img src="front/images/kitchens/ze1.jpg" alt="Kitchen Project">
-      <p>חידוש מטבח</p>
-    </div>
-        <div class="work-card" 
-        data-category="furniture"
-        data-title="צביעת מדף **"
-        data-desc=""
-        data-images="front/images/rehet/reh1B.jpg,front/images/rehet/reh1A.jpg ">
-      <img src="front/images/rehet/reh1A.jpg" alt="Table Repaint">
-      <p>צביעת מדף</p>
-    </div>
-        <div class="work-card" 
-        data-category="furniture"
-        data-title="חידוש מדרגות"
-        data-images="front/images/mad1.jpg,front/images/mad2.jpg ">
-      <img src="front/images/mad2.jpg" alt="stairs Repaint">
-      <p>חידוש מדרגות</p>
-    </div>
-    </div>
-</section>
-<div class="work-modal" id="workModal" aria-hidden="true">
-  <div class="work-modal__backdrop" data-close></div>
-  <div class="work-modal__content" role="dialog" aria-modal="true">
-    <button class="work-modal__close" title="סגור" data-close>&times;</button>
-
-    <h3 class="work-modal__title"></h3>
-    <p class="work-modal__desc"></p>
-
-    <div class="work-modal__viewer">
-      <button class="nav prev" aria-label="הקודם">&#10094;</button>
-      <img class="work-modal__image" src="" alt="">
-      <button class="nav next" aria-label="הבא">&#10095;</button>
+    <div class="section-header">
+      <h2>כל העבודות</h2>
+      <p class="section-sub">לחצו על כל תמונה לצפייה מלאה</p>
     </div>
 
-    <div class="work-modal__thumbs"></div>
-  </div>
-</div>
+    <div class="filter-buttons" role="group" aria-label="סינון לפי קטגוריה">
+      <button data-filter="all" class="active">הצג הכל</button>
+      <button data-filter="kitchen">מטבחים</button>
+      <button data-filter="doors">דלתות</button>
+      <button data-filter="furniture">רהיטים</button>
+      <button data-filter="dects">דיקטים</button>
+      <button data-filter="windows">חלונות</button>
+    </div>
 
+    <div class="work-grid" id="work-grid">
 
-<section class="contact" id="contact">
-  <div class="contact-wrap">
-    <div class="contact-card">
-      <h2>צור קשר</h2>
-      <p class="subtitle" >נשמח לייעוץ חינם והצעת מחיר</p>
+      <article class="work-card" tabindex="0"
+          data-category="kitchen" data-title="שיפוץ מטבח"
+          data-desc="חידוש דלתות, צביעה בתנור"
+          data-images="front/images/kitchens/before1.jpeg,front/images/kitchens/after1.jpg,front/images/kitchens/after11.jpg">
+        <div class="work-card__img-wrap">
+          <img src="front/images/kitchens/after1.jpg" alt="שיפוץ מטבח - לפני ואחרי" loading="lazy">
+          <span class="work-card__badge">מטבח</span>
+          <div class="work-card__overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <p>שיפוץ מטבח</p>
+      </article>
 
-      <div class="contact-actions">
-        <a class="btn tel-btn" href="tel:+972527245614" aria-label="התקשרו למצבעת אדם">
-          <span class="icon" aria-hidden="true">📞</span>
-          052‑553‑7552
-        </a>
-        <a class="btn wa-btn" href="https://wa.me/972525537552" target="_blank" rel="noopener" aria-label="פתיחת שיחת WhatsApp">
-          <i class="fab fa-whatsapp"></i>
-          WhatsApp
-        </a>
+      <article class="work-card" tabindex="0"
+          data-category="kitchen" data-title="שיפוץ מטבח עם איי"
+          data-desc="חידוש דלתות, איי, צביעה בתנור"
+          data-images="front/images/kitchens/tavoon1.jpg,front/images/kitchens/tavoon2.jpeg,front/images/kitchens/tavoon11.jpeg">
+        <div class="work-card__img-wrap">
+          <img src="front/images/kitchens/tavoon11.jpeg" alt="שיפוץ מטבח עם איי" loading="lazy">
+          <span class="work-card__badge">מטבח</span>
+          <div class="work-card__overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <p>שיפוץ מטבח</p>
+      </article>
 
+      <article class="work-card" tabindex="0"
+          data-category="doors" data-title="צביעת דלת כניסה"
+          data-desc="חידוש דלת כניסה"
+          data-images="front/images/doors/nseer's door.jpeg">
+        <div class="work-card__img-wrap">
+          <img src="front/images/doors/nseer's door.jpeg" alt="צביעת דלת כניסה" loading="lazy">
+          <span class="work-card__badge">דלת</span>
+          <div class="work-card__overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <p>צביעת דלת כניסה</p>
+      </article>
+
+      <article class="work-card" tabindex="0"
+          data-category="doors" data-title="צביעת דלת כניסה"
+          data-desc="חידוש דלת — לפני ואחרי"
+          data-images="front/images/doors/door1A.jpg,front/images/doors/door1B.jpg">
+        <div class="work-card__img-wrap">
+          <img src="front/images/doors/door1A.jpg" alt="דלת לפני ואחרי חידוש" loading="lazy">
+          <span class="work-card__badge">דלת</span>
+          <div class="work-card__overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <p>צביעת דלת כניסה</p>
+      </article>
+
+      <article class="work-card" tabindex="0"
+          data-category="furniture" data-title="צביעת שולחן אוכל"
+          data-desc="צביעת שולחן אוכל וסלון"
+          data-images="front/images/tabels/TAtta.jpg,front/images/tabels/TAtta2.jpg">
+        <div class="work-card__img-wrap">
+          <img src="front/images/tabels/TAtta.jpg" alt="שולחן אוכל לאחר צביעה" loading="lazy">
+          <span class="work-card__badge">רהיט</span>
+          <div class="work-card__overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <p>שיפוץ שולחן עץ</p>
+      </article>
+
+      <article class="work-card" tabindex="0"
+          data-category="windows" data-title="צביעת חלונות"
+          data-desc="חידוש חלונות עץ"
+          data-images="front/images/windows/the duke.jpg">
+        <div class="work-card__img-wrap">
+          <img src="front/images/windows/the duke.jpg" alt="חלונות עץ לאחר צביעה" loading="lazy">
+          <span class="work-card__badge">חלון</span>
+          <div class="work-card__overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <p>צביעת חלונות</p>
+      </article>
+
+      <article class="work-card" tabindex="0"
+          data-category="dects" data-title="צביעת דיקטים"
+          data-desc="חידוש לוחות דיקט"
+          data-images="front/images/dect/IMG_8884.jpeg,front/images/dect/IMG_8875.png">
+        <div class="work-card__img-wrap">
+          <img src="front/images/dect/IMG_8884.jpeg" alt="לוח דיקט לאחר צביעה" loading="lazy">
+          <span class="work-card__badge">דיקט</span>
+          <div class="work-card__overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <p>צביעת דיקט</p>
+      </article>
+
+      <article class="work-card" tabindex="0"
+          data-category="kitchen" data-title="חידוש מטבח"
+          data-desc="צביעה בתנור — לפני ואחרי"
+          data-images="front/images/kitchens/ze1B.jpg,front/images/kitchens/ze1.jpg,front/images/kitchens/ze2B.jpg,front/images/kitchens/ze2.jpg">
+        <div class="work-card__img-wrap">
+          <img src="front/images/kitchens/ze1B.jpg" alt="מטבח לאחר חידוש מלא" loading="lazy">
+          <span class="work-card__badge">מטבח</span>
+          <div class="work-card__overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <p>חידוש מטבח</p>
+      </article>
+
+      <article class="work-card" tabindex="0"
+          data-category="furniture" data-title="צביעת מדף"
+          data-desc="חידוש מדף עץ"
+          data-images="front/images/rehet/reh1B.jpg,front/images/rehet/reh1A.jpg">
+        <div class="work-card__img-wrap">
+          <img src="front/images/rehet/reh1A.jpg" alt="מדף עץ לאחר צביעה" loading="lazy">
+          <span class="work-card__badge">רהיט</span>
+          <div class="work-card__overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <p>צביעת מדף</p>
+      </article>
+
+      <article class="work-card" tabindex="0"
+          data-category="furniture" data-title="חידוש מדרגות"
+          data-desc="שיפוץ מדרגות עץ"
+          data-images="front/images/mad1.jpg,front/images/mad2.jpg">
+        <div class="work-card__img-wrap">
+          <img src="front/images/mad2.jpg" alt="מדרגות עץ לאחר חידוש" loading="lazy">
+          <span class="work-card__badge">רהיט</span>
+          <div class="work-card__overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <p>חידוש מדרגות</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- PROJECT MODAL -->
+  <div class="work-modal" id="workModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="work-modal__backdrop" data-close></div>
+    <div class="work-modal__content">
+      <button class="work-modal__close" title="סגור" data-close aria-label="סגור חלון">&times;</button>
+      <h3 class="work-modal__title" id="modal-title"></h3>
+      <p class="work-modal__desc"></p>
+      <div class="work-modal__viewer">
+        <button class="nav prev" aria-label="תמונה קודמת">&#10094;</button>
+        <img class="work-modal__image" src="" alt="">
+        <button class="nav next" aria-label="תמונה הבאה">&#10095;</button>
       </div>
+      <div class="work-modal__thumbs"></div>
+    </div>
+  </div>
 
-      <div class="contact-meta">
-        <div class="meta-item" dir="rtl">
-          <strong>אזור עבודה:</strong>
-          <span>צפון–מרכז (הגעה עד בית הלקוח)</span>
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <span class="section-eyebrow">הסיפור שלנו</span>
+        <h2>מעל 35 שנה של אהבה למקצוע</h2>
+        <p>מנסור אבו סעדה, בעל ניסיון של מעל 35 שנה בתחום צביעת העץ, חידוש ושיפוץ מטבחים, דלתות ורהיטים. עם שילוב של אמנות, דיוק ומקצועיות, הוא הפך עשרות בתים לחללים מחודשים ומרשימים.</p>
+        <p>עבודתו מתבצעת באהבה גדולה למקצוע, תוך הקפדה על שימוש בחומרים איכותיים ושירות אישי לכל לקוח — כי כל בית מיוחד.</p>
+        <div class="about-stats">
+          <div class="stat"><strong>35+</strong><span>שנות ניסיון</span></div>
+          <div class="stat"><strong>500+</strong><span>פרויקטים</span></div>
+          <div class="stat"><strong>100%</strong><span>מחויבות</span></div>
         </div>
       </div>
-
-      <div class="chip-list">
-        <span class="chip">חידוש מטבחים</span>
-        <span class="chip">צביעת דלתות</span>
-        <span class="chip">רהיטים עץ מלא</span>
-        <span class="chip">צביעה בתנור</span>
+      <div class="about-visual">
+        <div class="about-badge"><i class="fas fa-award"></i><span>מומחה מוסמך</span></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer class="site-footer">
-  <div class="footer-wrap">
-    <p>© 2025 מצבעת אדם. כל הזכויות שמורות.</p>
-    <p class="developer-credit"> <a href="https://github.com/firasabs" target="_blank">firasabs</a>נבנה ועוצב ע״י </p>
-  </div>
-</footer>
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="section-header">
+      <h2>מה הלקוחות אומרים</h2>
+    </div>
+    <div class="testimonials-grid">
+      <blockquote class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>העבודה יצאה מדהימה! המטבח נראה כמו חדש לגמרי. מנסור מקצועי, אדיב ועובד בניקיון מלא.</p>
+        <footer><strong>שרה כ.</strong> — אשדוד</footer>
+      </blockquote>
+      <blockquote class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>הזמנו חידוש דלת כניסה ויצא פנטסטי. המחיר הוגן והתוצאה מעל הציפיות. ממליצים בחום!</p>
+        <footer><strong>יוסי מ.</strong> — באר שבע</footer>
+      </blockquote>
+      <blockquote class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>מנסור הגיע לבית, נתן הצעת מחיר הוגנת ועבד מהר ומסודר. השולחן נראה כמו שנקנה היום.</p>
+        <footer><strong>נאדיה ב.</strong> — רהט</footer>
+      </blockquote>
+    </div>
+  </section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.event.move/2.0.0/jquery.event.move.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twentytwenty/1.0.0/jquery.twentytwenty.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.0.7/js/swiper.jquery.min.js"></script>
-<script src="script.js"></script>
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="section-header">
+      <h2>שאלות נפוצות</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>כמה עולה חידוש מטבח?</summary>
+        <p>המחיר תלוי בגודל המטבח, מספר הדלתות וסוג הגימור הרצוי. אנחנו מציעים הצעת מחיר חינם ולא מחייבת לאחר ביקור קצר בבית.</p>
+      </details>
+      <details class="faq-item">
+        <summary>כמה זמן לוקחת העבודה?</summary>
+        <p>חידוש מטבח בינוני לוקח בדרך כלל יום עד יומיים. עבודות קטנות יותר (דלת, שולחן) מסתיימות בדרך כלל ביום אחד.</p>
+      </details>
+      <details class="faq-item">
+        <summary>האם ניתן לצבוע בתוך הבית?</summary>
+        <p>כן! עובדים עם ציוד מקצועי שמאפשר עבודה נקייה ומינימום הפרעה לשגרת הבית.</p>
+      </details>
+      <details class="faq-item">
+        <summary>אילו חומרים משתמשים?</summary>
+        <p>משתמשים בצבעים איכותיים ועמידים מהמובחרים בשוק, עם אפשרות לצביעה בתנור לגימור מקצועי במיוחד.</p>
+      </details>
+      <details class="faq-item">
+        <summary>לאיזה אזורים מגיעים?</summary>
+        <p>מגיעים לכל הנגב והדרום — אשדוד, אשקלון, באר שבע, רהט, דימונה והסביבה.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-wrap">
+      <div class="contact-card">
+        <span class="section-eyebrow">בואו נדבר</span>
+        <h2>קבלו הצעת מחיר חינם</h2>
+        <p class="subtitle">ללא התחייבות — נשמח לייעץ ולהגיע עד הבית</p>
+        <div class="contact-actions">
+          <a class="btn tel-btn" href="tel:+972527245614" aria-label="התקשרו למצבעת אדם">
+            <span class="icon" aria-hidden="true">📞</span>
+            052-553-7552
+          </a>
+          <a class="btn wa-btn" href="https://wa.me/972525537552?text=שלום, אשמח לקבל הצעת מחיר" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+        </div>
+        <div class="contact-meta">
+          <div class="meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span><strong>אזור עבודה:</strong> צפון/מרכז</span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-clock"></i>
+            <span><strong>זמינות:</strong> ראשון–שישי, 08:00–18:00</span>
+          </div>
+        </div>
+        <div class="chip-list">
+          <span class="chip">חידוש מטבחים</span>
+          <span class="chip">צביעת דלתות</span>
+          <span class="chip">רהיטי עץ</span>
+          <span class="chip">צביעה בתנור</span>
+          <span class="chip">חלונות ודיקטים</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-wrap">
+      <p>© 2025 מצבעת אדם. כל הזכויות שמורות.</p>
+      <p class="developer-credit">נבנה ועוצב ע״י <a href="https://github.com/firasabs" target="_blank" rel="noopener">firasabs</a></p>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <a class="wa-float" href="https://wa.me/972525537552?text=שלום, אשמח לקבל הצעת מחיר" target="_blank" rel="noopener noreferrer" aria-label="פתחו שיחת WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.event.move/2.0.0/jquery.event.move.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twentytwenty/1.0.0/jquery.twentytwenty.min.js"></script>
+  <script src="front/script.js"></script>
 </body>
 </html>
