@@ -1423,3 +1423,125 @@ h1, h2, h3 { line-height: 1.25; }
   .work-grid { grid-template-columns: 1fr; }
   .logo-text { font-size: 1.1rem; }
 }
+
+/* ============================================================
+   LANGUAGE TOGGLE
+   ============================================================ */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  background: rgba(205,162,85,.12);
+  border: 1.5px solid rgba(205,162,85,.4);
+  border-radius: 999px;
+  padding: 4px 10px;
+  cursor: pointer;
+  gap: 0;
+  font-family: 'Heebo', sans-serif;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--gold);
+  transition: background var(--transition), border-color var(--transition);
+  white-space: nowrap;
+  min-height: 34px;
+  flex-shrink: 0;
+}
+
+.lang-toggle:hover {
+  background: rgba(205,162,85,.22);
+  border-color: var(--gold);
+}
+
+.lang-toggle__inner {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lang-option {
+  padding: 2px 6px;
+  border-radius: 999px;
+  transition: background var(--transition), color var(--transition);
+  line-height: 1.4;
+}
+
+.lang-option.active {
+  background: var(--gold);
+  color: var(--black);
+}
+
+.lang-divider {
+  color: rgba(205,162,85,.4);
+  font-weight: 400;
+  font-size: .75rem;
+}
+
+/* Smooth page-level transition when language switches */
+body.lang-switching * {
+  transition: opacity .15s ease !important;
+  opacity: .7;
+}
+
+/* LTR overrides when English is active */
+html[lang="en"] {
+  direction: ltr;
+}
+
+html[lang="en"] body {
+  direction: ltr;
+  text-align: left;
+}
+
+html[lang="en"] #site-header {
+  flex-direction: row;
+}
+
+html[lang="en"] #main-nav {
+  flex-direction: row;
+}
+
+/* In English, flip the mobile nav to slide from left */
+@media (max-width: 767px) {
+  html[lang="en"] #main-nav {
+    left: 0;
+    right: auto;
+    transform: translateX(-100%);
+  }
+  html[lang="en"] #main-nav.open {
+    transform: translateX(0);
+  }
+}
+
+html[lang="en"] .about-text p,
+html[lang="en"] .section-sub,
+html[lang="en"] .service-card p,
+html[lang="en"] .testimonial-card p,
+html[lang="en"] .faq-item p {
+  text-align: left;
+}
+
+html[lang="en"] .testimonial-card {
+  text-align: left;
+}
+
+html[lang="en"] .contact-meta {
+  direction: ltr;
+  align-items: flex-start;
+}
+
+html[lang="en"] .work-modal__content {
+  direction: ltr;
+}
+
+html[lang="en"] .filter-buttons {
+  direction: ltr;
+}
+
+html[lang="en"] .about-story__text p {
+  text-align: left;
+}
+
+/* Floating WA stays on the left always */
+html[lang="en"] .wa-float {
+  left: 24px;
+  right: auto;
+}
