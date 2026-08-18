@@ -1,5 +1,5 @@
 /**
- * מצבעת אדם — script.js
+ * מצבעת אדם - script.js
  * Single clean version. No duplicates.
  * Sections:
  *   1. I18N dictionary + engine
@@ -209,6 +209,40 @@ function applyLang(lang) {
   });
 
   try { localStorage.setItem(LANG_KEY, lang); } catch (_) {}
+}
+/*------------ABOUT BADGE */
+const badge = document.querySelector('.about-badge');
+
+badge.addEventListener('mousemove', (e) => {
+  const rect = badge.getBoundingClientRect();
+  const x = e.clientX - rect.left - rect.width/2;
+  const y = e.clientY - rect.top - rect.height/2;
+  
+  // Divide by 10 to keep the tilt angle subtle and elegant
+  badge.style.transform = `perspective(1000px) rotateX(${-y / 10}deg) rotateY(${x / 10}deg) translateY(-5px)`;
+});
+
+badge.addEventListener('mouseleave', () => {
+  badge.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+});
+// Check if the user is on a desktop/laptop interface
+if (window.innerWidth > 768) {
+  const badge = document.querySelector('.about-badge');
+
+  badge.addEventListener('mousemove', (e) => {
+    const rect = badge.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    
+    // Smooth custom tilt layout for desktop mouse tracking
+    badge.style.transform = `perspective(1000px) rotateX(${-y / 10}deg) rotateY(${x / 10}deg) translateY(-5px)`;
+    badge.style.boxShadow = `0 15px 30px rgba(0, 0, 0, 0.25)`;
+  });
+
+  badge.addEventListener('mouseleave', () => {
+    badge.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+    badge.style.boxShadow = 'var(--shadow-lg)';
+  });
 }
 
 /* ============================================================

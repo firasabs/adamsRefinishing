@@ -845,6 +845,7 @@ h1, h2, h3 { line-height: 1.25; }
 .about-section {
   padding: 80px 16px;
   background: var(--white);
+  direction: rtl; /* Highly recommended for proper Hebrew text rendering */
 }
 
 .about-inner {
@@ -860,6 +861,7 @@ h1, h2, h3 { line-height: 1.25; }
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 800;
   margin-bottom: 16px;
+  text-align: center; /* Centered to match the section vibe */
 }
 
 .about-text p {
@@ -867,19 +869,29 @@ h1, h2, h3 { line-height: 1.25; }
   margin-bottom: 12px;
   max-width: 560px;
   font-size: 1rem;
+  margin-left: auto;  /* Centers the paragraph block horizontally */
+  margin-right: auto; /* Centers the paragraph block horizontally */
+  text-align: right; /* Centers the actual text inside the paragraph */
 }
 
+/* UPDATED FOR CENTERING */
 .about-stats {
   display: flex;
-  gap: 24px;
+  justify-content: center; /* Centers the row of items horizontally */
+  align-items: center;     /* Aligns them vertically if needed */
+  gap: 32px;               /* Slightly increased spacing for better breathing room */
   margin-top: 28px;
   flex-wrap: wrap;
 }
 
+/* UPDATED FOR CENTERING */
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  align-items: center;     /* Centers the label text beneath the number */
+  gap: 4px;                /* Adjusted gap for better separation */
+  text-align: center;      /* Keeps text perfectly centered */
+  min-width: 100px;        /* Gives each stat item a consistent structural footprint */
 }
 
 .stat strong {
@@ -902,7 +914,11 @@ h1, h2, h3 { line-height: 1.25; }
   justify-content: center;
 }
 
+/* ============================================================
+   ABOUT BADGE (Fixed & Fully Integrated)
+   ============================================================ */
 .about-badge {
+  /* 1. Structural Styling (Keeps it looking like the gold card) */
   background: linear-gradient(135deg, var(--gold), var(--gold-dark));
   color: var(--black);
   border-radius: var(--radius-lg);
@@ -914,9 +930,51 @@ h1, h2, h3 { line-height: 1.25; }
   font-weight: 800;
   font-size: 1.1rem;
   box-shadow: var(--shadow-lg);
+  width: 100%; /* Ensures it fills its grid space cleanly */
+  max-width: 280px; /* Adjust this to make the card wider or narrower */
+
+  /* 2. Interactive & 3D Styling */
+  transition: transform 0.1s ease-out, box-shadow 0.2s ease;
+  transform-style: preserve-3d;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
-.about-badge i { font-size: 2.5rem; }
+/* Icon size safety rule */
+.about-badge i { 
+  font-size: 2.5rem; 
+}
+
+/* --- AUTOMATIC MOBILE ANIMATION --- */
+/* This triggers only on screens without a mouse cursor (phones/tablets) */
+@media (hover: none) and (pointer: coarse) {
+  .about-badge {
+    animation: autoMobileTilt 2.5s ease-in-out infinite;
+  }
+}
+
+/* Fluid 3D motion path */
+@keyframes autoMobileTilt {
+  0%, 100% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
+    box-shadow: var(--shadow-lg);
+  }
+  25% {
+    transform: perspective(1000px) rotateX(6deg) rotateY(-8deg) translateY(-4px);
+    box-shadow: -8px 15px 25px rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(-4deg) rotateY(8deg) translateY(-6px);
+    box-shadow: 8px 18px 30px rgba(0, 0, 0, 0.28);
+  }
+  75% {
+    transform: perspective(1000px) rotateX(5deg) rotateY(4deg) translateY(-2px);
+    box-shadow: 4px 12px 22px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+
 
 /* ============================================================
    TESTIMONIALS
