@@ -10,10 +10,13 @@
  *      d. Work card filter
  *      e. Service-link quick-filter
  *      f. Project modal
- *      g. Comparison sliders (jQuery)
+ *      g. Comparison sliders (vanilla: pointer events + keyboard)
  *      h. Before/After carousel
  *      i. Language toggle
- *   3. drags() — jQuery comparison slider helper (global scope)
+ *
+ * No jQuery. The comparison slider is the one component carried over
+ * from the redesign: clip-path reveal, pointer capture, arrow-key
+ * control, role="slider" semantics and a one-time reveal sweep.
  */
 
 /* ============================================================
@@ -38,6 +41,9 @@ const I18N = {
   'trust.finish':   { he: 'גימור מושלם',  en: 'Perfect Finish'    },
   'gallery.title':  { he: 'לפני ואחרי', en: 'Before & After' },
   'gallery.sub':    { he: 'גררו את המחוון לגילוי השינוי המדהים', en: 'Drag the slider to reveal the transformation' },
+  'a11y.cmp':       { he: 'גררו להשוואה בין לפני ואחרי', en: 'Drag to compare before and after' },
+  'a11y.prev':      { he: 'הקודם', en: 'Previous' },
+  'a11y.next':      { he: 'הבא',   en: 'Next'     },
   'label.after':    { he: 'אחרי', en: 'After'  },
   'label.before':   { he: 'לפני', en: 'Before' },
   'services.title': { he: 'השירותים שלנו', en: 'Our Services' },
@@ -173,6 +179,11 @@ function applyLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const val = t(el.getAttribute('data-i18n'));
     if (val !== null) el.textContent = val;
+  });
+
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+    const val = t(el.getAttribute('data-i18n-aria-label'));
+    if (val !== null) el.setAttribute('aria-label', val);
   });
 
   // Hero h1 needs innerHTML (contains <br> and <em>, no child listeners)
@@ -415,39 +426,89 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', e => {
       if (!modal.classList.contains('open')) return;
       if (e.key === 'Escape')     closeModal();
-      if (e.key === 'ArrowRight') prevImg();
-      if (e.key === 'ArrowLeft')  nextImg();
+      if (e.key === 'ArrowLeft')  prevImg();
+      if (e.key === 'ArrowRight') nextImg();
     });
   }
 
-  /* g. COMPARISON SLIDERS (jQuery) -------------------------- */
-  if (typeof $ !== 'undefined') {
-    $(function () {
-      const $sliders = $('.comparison-slider');
-      if (!$sliders.length) return;
+  /* g. COMPARISON SLIDERS (vanilla — pointer events + keyboard) --
+     Reveal is driven by a single --pos custom property and clip-path,
+     so there is nothing to re-measure on resize or slide change. */
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      $sliders.each(function () {
-        const $s = $(this);
-        const $r = $s.find('.resize');
-        const $d = $s.find('.divider');
-        $r.find('img').css({ width: $s.width() + 'px' });
-        requestAnimationFrame(() => {
-          $r.css('width', '50%');
-          $d.css('left',  '50%');
-        });
-        drags($d, $r, $s);
-      });
+  document.querySelectorAll('[data-cmp]').forEach(slider => {
+    const handle = slider.querySelector('.divider');
+    if (!handle) return;
 
-      $(window).on('resize orientationchange', function () {
-        $('.comparison-slider').each(function () {
-          const $s = $(this);
-          $s.find('.resize img').css({ width: $s.width() + 'px' });
-          $s.find('.resize').css('width', '50%');
-          $s.find('.divider').css('left',  '50%');
-        });
-      });
+    const setPos = (pct, announce) => {
+      pct = Math.max(0, Math.min(100, pct));
+      slider.style.setProperty('--pos', pct + '%');
+      if (announce !== false) handle.setAttribute('aria-valuenow', Math.round(pct));
+    };
+    setPos(50);
+    slider._setPos = setPos;
+
+    const pctFrom = e => {
+      const r = slider.getBoundingClientRect();
+      return ((e.clientX - r.left) / r.width) * 100;
+    };
+
+    handle.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      handle.setPointerCapture(e.pointerId);
+      handle.classList.add('draggable');
     });
-  }
+    handle.addEventListener('pointermove', e => {
+      if (!handle.hasPointerCapture || !handle.hasPointerCapture(e.pointerId)) return;
+      setPos(pctFrom(e));
+    });
+    const endDrag = e => {
+      if (handle.releasePointerCapture && handle.hasPointerCapture(e.pointerId)) {
+        handle.releasePointerCapture(e.pointerId);
+      }
+      handle.classList.remove('draggable');
+    };
+    handle.addEventListener('pointerup', endDrag);
+    handle.addEventListener('pointercancel', endDrag);
+
+    // tap anywhere on the photo to jump the divider there
+    slider.addEventListener('click', e => {
+      if (e.target.closest('.divider')) return;
+      setPos(pctFrom(e));
+    });
+
+    handle.addEventListener('keydown', e => {
+      const cur  = parseFloat(handle.getAttribute('aria-valuenow')) || 50;
+      const step = e.shiftKey ? 10 : 2;
+      let next = null;
+      if (e.key === 'ArrowLeft')  next = cur - step;
+      if (e.key === 'ArrowRight') next = cur + step;
+      if (e.key === 'Home')       next = 0;
+      if (e.key === 'End')        next = 100;
+      if (next === null) return;
+      e.preventDefault();
+      setPos(next);
+    });
+
+    // one-time reveal sweep the first time the slider is seen
+    if (!prefersReduced && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if (!en.isIntersecting) return;
+          io.disconnect();
+          const t0 = performance.now(), from = 68, to = 50, dur = 950;
+          const tick = now => {
+            const k = Math.min(1, (now - t0) / dur);
+            setPos(from + (to - from) * (1 - Math.pow(1 - k, 3)), false);
+            if (k < 1) requestAnimationFrame(tick);
+          };
+          setPos(from, false);
+          requestAnimationFrame(tick);
+        });
+      }, { threshold: .45 });
+      io.observe(slider);
+    }
+  });
 
   /* h. BEFORE/AFTER CAROUSEL -------------------------------- */
   const slides  = Array.from(document.querySelectorAll('.carousel-container .slide'));
@@ -459,13 +520,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let carIdx = 0;
 
     const recenter = sl => {
-      const s   = sl.querySelector('.comparison-slider'); if (!s) return;
-      const r   = s.querySelector('.resize');
-      const d   = s.querySelector('.divider');
-      const img = r && r.querySelector('img');
-      if (img) img.style.width = s.clientWidth + 'px';
-      if (r)   r.style.width   = '50%';
-      if (d)   d.style.left    = '50%';
+      const s = sl.querySelector('.comparison-slider');
+      if (s && s._setPos) s._setPos(50);
     };
 
     const showSlide = idx => {
@@ -484,7 +540,6 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     carPrev && carPrev.addEventListener('click', () => showSlide(carIdx - 1));
     carNext && carNext.addEventListener('click', () => showSlide(carIdx + 1));
-    window.addEventListener('resize', () => recenter(slides[carIdx]));
 
     let swipeX = 0;
     const carWrap = document.querySelector('.carousel-container');
@@ -518,52 +573,3 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLang(savedLang);
 
 }); // end DOMContentLoaded
-
-
-/* ============================================================
-   3. drags() — jQuery comparison slider drag helper
-   Global scope so it's accessible from jQuery $(function(){})
-   ============================================================ */
-function drags(dragEl, resizeEl, container) {
-  let touched = false;
-  window.addEventListener('touchstart', () => { touched = true;  }, { passive: true });
-  window.addEventListener('touchend',   () => { touched = false; }, { passive: true });
-
-  dragEl.on('mousedown touchstart', function (e) {
-    dragEl.addClass('draggable');
-    resizeEl.addClass('resizable');
-
-    const pageX  = e.pageX || e.originalEvent.touches[0].pageX;
-    const dw     = dragEl.outerWidth();
-    const posX   = dragEl.offset().left + dw - pageX;
-    const cLeft  = container.offset().left;
-    const cWidth = container.outerWidth();
-    const minL   = cLeft + 10;
-    const maxL   = cLeft + cWidth - dw - 10;
-
-    dragEl.parents().on('mousemove touchmove', function (e) {
-      if (!touched) e.preventDefault();
-      const mx  = e.pageX || e.originalEvent.touches[0].pageX;
-      let left  = mx + posX - dw;
-      if (left < minL) left = minL;
-      else if (left > maxL) left = maxL;
-      const pct = ((left + dw / 2 - cLeft) / cWidth * 100) + '%';
-
-      $('.draggable')
-        .css('left', pct)
-        .on('mouseup touchend touchcancel', function () {
-          $(this).removeClass('draggable');
-          resizeEl.removeClass('resizable');
-        });
-      $('.resizable').css('width', pct);
-
-    }).on('mouseup touchend touchcancel', function () {
-      dragEl.removeClass('draggable');
-      resizeEl.removeClass('resizable');
-    });
-
-  }).on('mouseup touchend touchcancel', function () {
-    dragEl.removeClass('draggable');
-    resizeEl.removeClass('resizable');
-  });
-}

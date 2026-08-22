@@ -121,67 +121,88 @@
     <div class="carousel-container" role="region" aria-live="polite">
       <div class="slide active">
         <div class="comparison-slider-wrapper">
-          <div class="comparison-slider">
+          <div class="comparison-slider" data-cmp style="--ar:4/3">
             <div class="overlay overlay--after" data-i18n="label.after">אחרי</div>
             <img src="front/images/kitchens/after1.jpg" alt="Kitchen after restoration" loading="eager">
             <div class="resize">
               <div class="overlay overlay--before" data-i18n="label.before">לפני</div>
               <img src="front/images/kitchens/before1.jpeg" alt="Kitchen before restoration" loading="eager">
             </div>
-            <div class="divider"></div>
+            <div class="divider" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                 data-i18n-aria-label="a11y.cmp" aria-label="גררו להשוואה בין לפני ואחרי"></div>
           </div>
         </div>
       </div>
+        <div class="slide">
+        <div class="comparison-slider-wrapper">
+          <div class="comparison-slider" data-cmp style="--ar:3/4">
+            <div class="overlay overlay--after" data-i18n="label.after">אחרי</div>
+            <img src="front/images/kitchens/kbabir_A1.jpg" alt="Kitchen after renovation" loading="lazy">
+            <div class="resize">
+              <div class="overlay overlay--before" data-i18n="label.before">לפני</div>
+              <img src="front/images/kitchens/kbabir_B1.jpg" alt="Kitchen before renovation" loading="lazy">
+            </div>
+            <div class="divider" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                 data-i18n-aria-label="a11y.cmp" aria-label="גררו להשוואה בין לפני ואחרי"></div>
+          </div>
+        </div>
+      </div>
+
       <div class="slide">
         <div class="comparison-slider-wrapper">
-          <div class="comparison-slider">
+          <div class="comparison-slider" data-cmp style="--ar:3/4">
             <div class="overlay overlay--after" data-i18n="label.after">אחרי</div>
             <img src="front/images/kitchens/after2.jpg" alt="Kitchen after painting" loading="lazy">
             <div class="resize">
               <div class="overlay overlay--before" data-i18n="label.before">לפני</div>
               <img src="front/images/kitchens/before2.jpg" alt="Kitchen before painting" loading="lazy">
             </div>
-            <div class="divider"></div>
+            <div class="divider" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                 data-i18n-aria-label="a11y.cmp" aria-label="גררו להשוואה בין לפני ואחרי"></div>
           </div>
         </div>
       </div>
       <div class="slide">
         <div class="comparison-slider-wrapper">
-          <div class="comparison-slider">
+          <div class="comparison-slider" data-cmp style="--ar:914/1072">
             <div class="overlay overlay--after" data-i18n="label.after">אחרי</div>
             <img src="front/images/doors/door1A_resized.jpg" alt="Door after restoration" loading="lazy">
             <div class="resize">
               <div class="overlay overlay--before" data-i18n="label.before">לפני</div>
               <img src="front/images/doors/door1B_resized.jpg" alt="Door before restoration" loading="lazy">
             </div>
-            <div class="divider"></div>
+            <div class="divider" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                 data-i18n-aria-label="a11y.cmp" aria-label="גררו להשוואה בין לפני ואחרי"></div>
           </div>
         </div>
       </div>
       <div class="slide">
         <div class="comparison-slider-wrapper">
-          <div class="comparison-slider">
+          <div class="comparison-slider" data-cmp style="--ar:3/4">
             <div class="overlay overlay--after" data-i18n="label.after">אחרי</div>
-            <img src="front/images/kitchens/ze1B.jpg" alt="Kitchen after renovation" loading="lazy">
+            <img src="front/images/kitchens/ze1.jpg" alt="Kitchen after renovation" loading="lazy">
             <div class="resize">
               <div class="overlay overlay--before" data-i18n="label.before">לפני</div>
-              <img src="front/images/kitchens/ze1.jpg" alt="Kitchen before renovation" loading="lazy">
+              <img src="front/images/kitchens/ze1B.jpg" alt="Kitchen before renovation" loading="lazy">
             </div>
-            <div class="divider"></div>
+            <div class="divider" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                 data-i18n-aria-label="a11y.cmp" aria-label="גררו להשוואה בין לפני ואחרי"></div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="carousel-controls">
-      <button class="carousel-btn prev" aria-label="Previous">&#8250;</button>
+      <button class="carousel-btn prev" data-i18n-aria-label="a11y.prev" aria-label="הקודם"></button>
       <div class="pagination">
         <button class="page-dot active" data-index="0">1</button>
         <button class="page-dot" data-index="1">2</button>
         <button class="page-dot" data-index="2">3</button>
         <button class="page-dot" data-index="3">4</button>
+        <button class="page-dot" data-index="4">5</button>
+
       </div>
-      <button class="carousel-btn next" aria-label="Next">&#8249;</button>
+      <button class="carousel-btn next" data-i18n-aria-label="a11y.next" aria-label="הבא"></button>
     </div>
   </section>
 
@@ -416,9 +437,9 @@
       <h3 class="work-modal__title" id="modal-title"></h3>
       <p class="work-modal__desc"></p>
       <div class="work-modal__viewer">
-        <button class="nav prev" aria-label="Previous">&#10094;</button>
+        <button class="nav prev" data-i18n-aria-label="a11y.prev" aria-label="הקודם"></button>
         <img class="work-modal__image" src="" alt="">
-        <button class="nav next" aria-label="Next">&#10095;</button>
+        <button class="nav next" data-i18n-aria-label="a11y.next" aria-label="הבא"></button>
       </div>
       <div class="work-modal__thumbs"></div>
     </div>
@@ -567,9 +588,6 @@
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.event.move/2.0.0/jquery.event.move.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twentytwenty/1.0.0/jquery.twentytwenty.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

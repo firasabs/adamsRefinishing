@@ -130,7 +130,9 @@ h1, h2, h3 { line-height: 1.25; }
 .nav-cta::after { display: none !important; }
 
 /* Header phone icon (mobile) */
-.header-phone {
+/* Header phone icon — mobile only. Scoped to the header so the rule can
+   never hide a phone link elsewhere on the page. */
+#site-header .header-phone {
   display: none;
   color: var(--gold);
   font-size: 1.2rem;
@@ -300,6 +302,13 @@ h1, h2, h3 { line-height: 1.25; }
 }
 .tel-btn:hover { background: var(--gold-dark); }
 
+.phone-number {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: .5px;
+  font-variant-numeric: tabular-nums;
+}
+
 .wa-btn {
   background: #25D366;
   color: var(--white);
@@ -398,12 +407,17 @@ h1, h2, h3 { line-height: 1.25; }
 .comparison-slider {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  /* Each pair carries its own --ar so portrait photos are not cropped in half */
+  aspect-ratio: var(--ar, 4 / 3);
+  max-height: 78svh;
+  margin-inline: auto;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   background: var(--black);
   user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
 }
 
 .comparison-slider > img {
@@ -432,11 +446,10 @@ h1, h2, h3 { line-height: 1.25; }
 
 .comparison-slider .resize {
   position: absolute;
-  top: 0; left: 0;
-  height: 100%;
-  width: 50%;
-  overflow: hidden;
+  inset: 0;
   z-index: 1;
+  clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0);
+  will-change: clip-path;
 }
 
 .comparison-slider .resize > img {
@@ -449,12 +462,30 @@ h1, h2, h3 { line-height: 1.25; }
 .comparison-slider .divider {
   position: absolute;
   top: 0; bottom: 0;
-  left: 50%;
-  width: 3px;
-  background: rgba(255,255,255,.6);
+  left: var(--pos, 50%);
+  width: 56px;
+  margin-inline-start: -28px;
+  background: transparent;
   cursor: ew-resize;
   z-index: 2;
   touch-action: none;
+}
+
+/* the visible hairline, centred inside the 56px grab area */
+.comparison-slider .divider::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 3px;
+  margin-inline-start: -1.5px;
+  background: rgba(255,255,255,.75);
+}
+
+.comparison-slider .divider:focus-visible { outline: none; }
+.comparison-slider .divider:focus-visible::before {
+  outline: 3px solid var(--white);
+  outline-offset: 3px;
 }
 
 .comparison-slider .divider::before {
@@ -463,29 +494,18 @@ h1, h2, h3 { line-height: 1.25; }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  background: var(--gold);
+  width: 48px;
+  height: 48px;
+  background: var(--gold) center / 20px 20px no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-5 6 5 6M15 6l5 6-5 6'/%3E%3C/svg%3E");
   border-radius: 50%;
   box-shadow: 0 2px 10px rgba(0,0,0,.4);
-  transition: all .1s ease;
-}
-
-.comparison-slider .divider::after {
-  content: '‹ ›';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--black);
-  font-size: .9rem;
-  font-weight: 900;
-  pointer-events: none;
+  transition: width .15s ease, height .15s ease;
   z-index: 1;
-  line-height: 1;
 }
 
-.comparison-slider .divider.draggable::before { width: 48px; height: 48px; }
+.comparison-slider .divider.draggable::before,
+.comparison-slider .divider:hover::before { width: 52px; height: 52px; }
 .comparison-slider img { pointer-events: none; }
 
 /* Carousel controls */
@@ -504,7 +524,7 @@ h1, h2, h3 { line-height: 1.25; }
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  font-size: 1.3rem;
+  font-size: 0;               /* chevron is border-drawn; kills stray glyphs */
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -513,6 +533,25 @@ h1, h2, h3 { line-height: 1.25; }
   min-width: 44px;
 }
 .carousel-btn:hover { background: var(--gold-dark); transform: scale(1.05); }
+
+/* Chevrons are drawn with borders, not typed as characters.
+   Every angle-quote glyph (U+2039/203A, U+276E/276F) is Bidi_Mirrored,
+   so the renderer flips it inside an RTL context and the arrow ends up
+   pointing the wrong way. A rotated border corner has no such problem.
+   Goal in both languages: the left-hand button points left, the
+   right-hand button points right. */
+.carousel-btn::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-top: 2.5px solid currentColor;
+  border-right: 2.5px solid currentColor;
+}
+.carousel-btn.prev::before { transform: rotate(45deg)   translate(-2px, 2px); }
+.carousel-btn.next::before { transform: rotate(-135deg) translate(-2px, 2px); }
+
+html[lang="en"] .carousel-btn.prev::before { transform: rotate(-135deg) translate(-2px, 2px); }
+html[lang="en"] .carousel-btn.next::before { transform: rotate(45deg)   translate(-2px, 2px); }
 
 .page-dot {
   display: inline-grid;
@@ -606,6 +645,9 @@ h1, h2, h3 { line-height: 1.25; }
   transition: gap var(--transition);
 }
 .service-link:hover { gap: 10px; }
+
+/* fa-arrow-left reads as "forward" in Hebrew; mirror it for English. */
+html[lang="en"] .service-link i { transform: scaleX(-1); }
 
 /* ============================================================
    PORTFOLIO / WORK GRID
@@ -816,6 +858,20 @@ h1, h2, h3 { line-height: 1.25; }
   z-index: 2;
 }
 .work-modal__viewer .nav:hover { background: rgba(0,0,0,.8); }
+
+/* Border-drawn chevrons here too — see the note on .carousel-btn. These
+   buttons are pinned physically (prev left, next right) in both languages. */
+.work-modal__viewer .nav { font-size: 0; }
+.work-modal__viewer .nav::before {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-top: 2.5px solid currentColor;
+  border-right: 2.5px solid currentColor;
+}
+.work-modal__viewer .prev::before { transform: rotate(-135deg) translate(-2px, 2px); }
+.work-modal__viewer .next::before { transform: rotate(45deg)   translate(-2px, 2px); }
 .work-modal__viewer .prev { left: 8px; }
 .work-modal__viewer .next { right: 8px; }
 
@@ -1406,7 +1462,7 @@ h1, h2, h3 { line-height: 1.25; }
 
   /* Show hamburger + phone, hide desktop nav */
   .nav-toggle { display: flex; }
-  .header-phone { display: flex; align-items: center; }
+  #site-header .header-phone { display: flex; align-items: center; }
 
   #main-nav {
     position: fixed;
