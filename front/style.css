@@ -295,12 +295,30 @@ h1, h2, h3 { line-height: 1.25; }
 }
 .btn-outline:hover { background: rgba(255,255,255,.1); }
 
+/* Phone CTA in the contact card: a gold frame rather than a gold fill, so
+   it reads as the secondary action beside the solid WhatsApp button.
+   Border uses --gold-dark (3.1:1 on white) to clear the 3:1 minimum for
+   UI boundaries; the number itself stays dark for maximum legibility.
+   Padding is 2px tighter than .btn to offset the border, so this button
+   matches the WhatsApp button's height exactly. */
 .tel-btn {
-  background: var(--gold);
-  color: var(--black);
-  box-shadow: 0 4px 14px rgba(205,162,85,.3);
+  background: rgba(205,162,85,.08);
+  color: var(--text-dark);
+  border: 2px solid var(--gold-dark);
+  padding: 11px 20px;
+  box-shadow: 0 4px 14px rgba(205,162,85,.18);
 }
-.tel-btn:hover { background: var(--gold-dark); }
+.tel-btn i { color: var(--gold-dark); transition: color var(--transition); }
+
+.tel-btn:hover,
+.tel-btn:focus-visible {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+  box-shadow: 0 8px 22px rgba(205,162,85,.38);
+}
+.tel-btn:hover i,
+.tel-btn:focus-visible i { color: var(--black); }
 
 .phone-number {
   font-weight: 700;
@@ -1182,6 +1200,11 @@ html[lang="en"] .service-link i { transform: scaleX(-1); }
   justify-content: center;
   margin-bottom: 20px;
 }
+
+/* Pin both CTAs to one height. In the desktop row they equalise for free
+   (align-items: stretch); once they stack on mobile each takes its own
+   content height and the framed phone button ends up 2px taller. */
+.contact-actions .btn { min-height: 52px; }
 
 .contact-meta {
   display: flex;

@@ -22,6 +22,13 @@
   }
   </script>
 
+  <!-- Favicon / tab icon: the spray-gun mark on the brand black, cropped
+       square from front/images/logo/trans_airgun.png -->
+  <link rel="icon" type="image/png" sizes="32x32" href="front/images/logo/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="front/images/logo/favicon-512.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="front/images/logo/favicon-180.png">
+  <meta name="theme-color" content="#111111">
+
   <link rel="stylesheet" href="front/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -529,9 +536,10 @@
         <h2 data-i18n="contact.title">קבלו הצעת מחיר חינם</h2>
         <p class="subtitle" data-i18n="contact.sub">ללא התחייבות - נשמח לייעץ ולהגיע עד הבית</p>
         <div class="contact-actions">
-          <a class="header-phone" href="tel:+972525537552" aria-label="Call us">
+          <a class="btn tel-btn" href="tel:+972525537552"
+             data-i18n-aria-label="a11y.call" aria-label="התקשרו אלינו">
             <i class="fas fa-phone"></i>
-            <span class="phone-number">052-553-7552</span>
+            <span class="phone-number" dir="ltr">052-553-7552</span>
           </a>
           <a class="btn wa-btn"
              data-wa-he="https://wa.me/972525537552?text=שלום, אשמח לקבל הצעת מחיר"

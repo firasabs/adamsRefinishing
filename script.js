@@ -41,6 +41,7 @@ const I18N = {
   'trust.finish':   { he: 'גימור מושלם',  en: 'Perfect Finish'    },
   'gallery.title':  { he: 'לפני ואחרי', en: 'Before & After' },
   'gallery.sub':    { he: 'גררו את המחוון לגילוי השינוי המדהים', en: 'Drag the slider to reveal the transformation' },
+  'a11y.call':      { he: 'התקשרו אלינו', en: 'Call us' },
   'a11y.cmp':       { he: 'גררו להשוואה בין לפני ואחרי', en: 'Drag to compare before and after' },
   'a11y.prev':      { he: 'הקודם', en: 'Previous' },
   'a11y.next':      { he: 'הבא',   en: 'Next'     },
