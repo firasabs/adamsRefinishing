@@ -1,5 +1,30 @@
 <template>
 <style>
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-hebrew.woff2) format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-symbols.woff2) format('woff2');
+      unicode-range: U+2022, U+2460-24FF, U+25A0-27BF;
+    }
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-latin.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122;
+    }
+
   #root {
     position: relative;
     width: 1080px;
@@ -48,7 +73,7 @@
     align-items: baseline;
     justify-content: center;
     gap: 0.9cqw;
-    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    font-family: 'Heebo', system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
     font-weight: 800;
     font-size: 8.6cqw;
     line-height: 1.18;
@@ -82,13 +107,13 @@
   }
 </style>
 
-<div id="root" data-composition-id="01-hook" data-start="0" data-duration="3" data-width="1080" data-height="1920">
-  <div class="clip" id="hook01-bg" data-start="0" data-duration="3" data-track-index="0">
+<div id="root" data-composition-id="01-hook" data-start="0" data-duration="3.4" data-width="1080" data-height="1920">
+  <div class="clip" id="hook01-bg" data-start="0" data-duration="3.4" data-track-index="0">
     <img class="hook01-bg-img" src="assets/before2.jpg" alt="" />
     <div class="hook01-scrim"></div>
   </div>
 
-  <div class="clip" id="hook01-text" data-start="0" data-duration="3" data-track-index="1">
+  <div class="clip" id="hook01-text" data-start="0" data-duration="3.4" data-track-index="1">
     <div class="hook01-stack">
       <div class="hook01-line" id="hook01-line1" dir="rtl">
         <span class="hook01-word" id="hook01-l1w1">מטבח</span>

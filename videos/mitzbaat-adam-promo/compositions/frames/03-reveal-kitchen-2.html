@@ -1,12 +1,37 @@
 <template>
-<div id="root" data-composition-id="03-reveal-kitchen-2">
+<div id="root" data-composition-id="03-reveal-kitchen-2" data-start="0" data-duration="5.5" data-width="1080" data-height="1920">
   <style>
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-hebrew.woff2) format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-symbols.woff2) format('woff2');
+      unicode-range: U+2022, U+2460-24FF, U+25A0-27BF;
+    }
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-latin.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122;
+    }
+
     #root {
       position: relative;
       width: 1080px;
       height: 1920px;
       overflow: hidden;
-      font-family: sans-serif;
+      font-family: 'Heebo', sans-serif;
     }
 
     /* ---- ground: full-bleed white + dual side-glow ambient (accent A ~30%, accent B ~70%) ---- */
@@ -98,12 +123,12 @@
     }
   </style>
 
-  <div class="clip rk2-ground" data-start="0" data-duration="5" data-track-index="0">
+  <div class="clip rk2-ground" data-start="0" data-duration="5.5" data-track-index="0">
     <div class="rk2-glow rk2-glow-a" id="rk2-glow-a"></div>
     <div class="rk2-glow rk2-glow-b" id="rk2-glow-b"></div>
   </div>
 
-  <div class="clip rk2-stage-layer" data-start="0" data-duration="5" data-track-index="1">
+  <div class="clip rk2-stage-layer" data-start="0" data-duration="5.5" data-track-index="1">
     <div class="rk2-perspective">
       <div class="rk2-split">
         <div class="rk2-card" id="rk2-card-left">
@@ -116,11 +141,10 @@
     </div>
   </div>
 
-  <div class="clip rk2-chip-layer" data-start="1.7" data-duration="3.3" data-track-index="2">
+  <div class="clip rk2-chip-layer" data-start="1.7" data-duration="3.8" data-track-index="2">
     <div class="rk2-chip" id="rk2-chip" dir="rtl" lang="he">חידוש מטבחים</div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script>
     (function () {
       var tl = gsap.timeline({ paused: true });

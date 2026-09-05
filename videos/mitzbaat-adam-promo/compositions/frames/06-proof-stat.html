@@ -1,11 +1,11 @@
 <template>
-<div id="root" data-composition-id="06-proof-stat">
+<div id="root" data-composition-id="06-proof-stat" data-start="0" data-duration="4" data-width="1080" data-height="1920">
 
   <!-- Scene 1 (0.0–0.4s): full-bleed dark-panel ground — the calm break after five bright photo beats -->
-  <div class="clip ps6-bg" data-start="0" data-duration="3.5" data-track-index="0"></div>
+  <div class="clip ps6-bg" data-start="0" data-duration="4" data-track-index="0"></div>
 
   <!-- Foreground statement content -->
-  <div class="clip ps6-content" data-start="0" data-duration="3.5" data-track-index="1">
+  <div class="clip ps6-content" data-start="0" data-duration="4" data-track-index="1">
 
     <div class="ps6-headline-wrap">
       <div id="ps6-line1" class="ps6-line" dir="rtl" lang="he">מעל 35 שנה</div>
@@ -17,6 +17,31 @@
   </div>
 
   <style>
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-hebrew.woff2) format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-symbols.woff2) format('woff2');
+      unicode-range: U+2022, U+2460-24FF, U+25A0-27BF;
+    }
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-latin.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122;
+    }
+
     #root {
       position: relative;
       width: 100%;
@@ -55,7 +80,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-family: sans-serif;
+      font-family: 'Heebo', sans-serif;
       font-weight: 800;
       font-size: 10.4cqw;
       line-height: 1.15;
@@ -72,7 +97,7 @@
       right: 0;
       top: 55.5cqh;
       text-align: center;
-      font-family: sans-serif;
+      font-family: 'Heebo', sans-serif;
       font-weight: 600;
       font-size: 2.6cqw;
       letter-spacing: 0.04em;
@@ -99,14 +124,14 @@
       // fades as line 2 translates up from below to take its place at center.
       tl.to(
         "#ps6-line1",
-        { y: -34, opacity: 0, duration: 0.5, ease: "power2.inOut" },
+        { y: -34, opacity: 0, duration: 0.4, ease: "power2.in" },
         1.5
       );
       tl.fromTo(
         "#ps6-line2",
         { y: 34, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
-        1.6
+        { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
+        1.95
       );
 
       // Once settled, the sub-line fades in beneath in mono chrome and holds to the cut.
@@ -114,7 +139,7 @@
         "#ps6-sub",
         { opacity: 0, y: 12 },
         { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-        2.3
+        2.6
       );
 
       // Held read from ~2.8s to the 3.5s cut — no exit tween (the root transition owns the exit).

@@ -1,12 +1,37 @@
 <template>
 <style>
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-hebrew.woff2) format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-symbols.woff2) format('woff2');
+      unicode-range: U+2022, U+2460-24FF, U+25A0-27BF;
+    }
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-latin.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122;
+    }
+
   #root {
     position: relative;
     width: 1080px;
     height: 1920px;
     overflow: hidden;
     container-type: size;
-    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Heebo', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   }
 
   .clip {
@@ -136,13 +161,13 @@
   }
 </style>
 
-<div id="root" data-composition-id="05-reveal-furniture">
-  <div class="clip fr05-bg" data-start="0" data-duration="4.5" data-track-index="0"></div>
+<div id="root" data-composition-id="05-reveal-furniture" data-start="0" data-duration="4.9" data-width="1080" data-height="1920">
+  <div class="clip fr05-bg" data-start="0" data-duration="4.9" data-track-index="0"></div>
 
-  <div class="clip fr05-glow fr05-glow-a" id="fr05-glow-a" data-start="0" data-duration="4.5" data-track-index="1"></div>
-  <div class="clip fr05-glow fr05-glow-b" id="fr05-glow-b" data-start="0" data-duration="4.5" data-track-index="1"></div>
+  <div class="clip fr05-glow fr05-glow-a" id="fr05-glow-a" data-start="0" data-duration="4.9" data-track-index="1"></div>
+  <div class="clip fr05-glow fr05-glow-b" id="fr05-glow-b" data-start="0" data-duration="4.9" data-track-index="2"></div>
 
-  <div class="clip fr05-stage-wrap" data-start="0" data-duration="4.5" data-track-index="2">
+  <div class="clip fr05-stage-wrap" data-start="0" data-duration="4.9" data-track-index="3">
     <div class="fr05-split-stage">
       <div class="fr05-card fr05-card-left" id="fr05-card-left">
         <div class="fr05-card-inner">
@@ -157,11 +182,11 @@
     </div>
   </div>
 
-  <div class="clip fr05-chip-wrap" data-start="1.6" data-duration="2.9" data-track-index="3">
+  <div class="clip fr05-chip-wrap" data-start="1.6" data-duration="3.3" data-track-index="4">
     <div class="fr05-chip" id="fr05-chip" dir="rtl">רהיטי עץ</div>
   </div>
 
-  <div class="clip fr05-quote-wrap" data-start="2.4" data-duration="2.1" data-track-index="4">
+  <div class="clip fr05-quote-wrap" data-start="2.4" data-duration="2.5" data-track-index="5">
     <div class="fr05-quote" id="fr05-quote">
       <p class="fr05-quote-line"><span class="fr05-quote-stars">★★★★★</span> העבודה יצאה מדהימה! המטבח נראה כמו חדש לגמרי.</p>
       <p class="fr05-quote-cite">— שרה כ., חיפה</p>
