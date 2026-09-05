@@ -1,0 +1,235 @@
+<template>
+<style>
+  #root {
+    position: relative;
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    container-type: size;
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  #root .clip {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ---------- full-bleed ground ---------- */
+  .fr05-bg {
+    background: #ffffff;
+  }
+
+  /* ---------- ambient glow blooms (dual side glow, un-triggered) ---------- */
+  .fr05-glow {
+    border-radius: 50%;
+    filter: blur(46px);
+    transform-origin: 50% 50%;
+    opacity: 0;
+  }
+  .fr05-glow-a {
+    left: 14px;
+    top: 180px;
+    width: 620px;
+    height: 620px;
+    background: radial-gradient(circle, #cda255 0%, rgba(205, 162, 85, 0) 70%);
+  }
+  .fr05-glow-b {
+    left: 416px;
+    top: 150px;
+    width: 680px;
+    height: 680px;
+    background: radial-gradient(circle, #b8893e 0%, rgba(184, 137, 62, 0) 70%);
+  }
+
+  /* ---------- split-tilt stage ---------- */
+  .fr05-stage-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 170px;
+    perspective: 1900px;
+  }
+  .fr05-split-stage {
+    display: flex;
+    gap: 48px;
+    transform-style: preserve-3d;
+  }
+  .fr05-card {
+    width: 480px;
+    transform-style: preserve-3d;
+    transform-origin: 50% 50%;
+    will-change: transform;
+    border: 3px solid #111111;
+    padding: 5px;
+    background: #ffffff;
+  }
+  .fr05-card-inner {
+    border: 1.5px solid #111111;
+    width: 100%;
+    height: 640px;
+    overflow: hidden;
+  }
+  .fr05-card-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ---------- label chip ---------- */
+  .fr05-chip-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 806px;
+  }
+  .fr05-chip {
+    transform-origin: 50% 50%;
+    will-change: transform;
+    background: #b8893e;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 3.4cqw;
+    line-height: 1.15;
+    padding: 16px 34px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ---------- testimonial red-leftbar strip ---------- */
+  .fr05-quote-wrap {
+    left: 64px;
+    right: 64px;
+    top: 1010px;
+    bottom: auto;
+    display: block;
+  }
+  .fr05-quote {
+    border-left: 4px solid #b8893e;
+    padding: 6px 0 6px 22px;
+    will-change: transform, opacity;
+  }
+  .fr05-quote-line {
+    direction: rtl;
+    text-align: right;
+    font-size: 3.3cqw;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #111111;
+    margin: 0 0 12px 0;
+  }
+  .fr05-quote-stars {
+    color: #b8893e;
+  }
+  .fr05-quote-cite {
+    direction: rtl;
+    text-align: right;
+    font-size: 2cqw;
+    line-height: 1.3;
+    font-weight: 500;
+    color: rgba(17, 17, 17, 0.65);
+    margin: 0;
+  }
+</style>
+
+<div id="root" data-composition-id="05-reveal-furniture">
+  <div class="clip fr05-bg" data-start="0" data-duration="4.5" data-track-index="0"></div>
+
+  <div class="clip fr05-glow fr05-glow-a" id="fr05-glow-a" data-start="0" data-duration="4.5" data-track-index="1"></div>
+  <div class="clip fr05-glow fr05-glow-b" id="fr05-glow-b" data-start="0" data-duration="4.5" data-track-index="1"></div>
+
+  <div class="clip fr05-stage-wrap" data-start="0" data-duration="4.5" data-track-index="2">
+    <div class="fr05-split-stage">
+      <div class="fr05-card fr05-card-left" id="fr05-card-left">
+        <div class="fr05-card-inner">
+          <img class="fr05-card-img" src="assets/reh1A.jpg" alt="" />
+        </div>
+      </div>
+      <div class="fr05-card fr05-card-right" id="fr05-card-right">
+        <div class="fr05-card-inner">
+          <img class="fr05-card-img" src="assets/reh1B.jpg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clip fr05-chip-wrap" data-start="1.6" data-duration="2.9" data-track-index="3">
+    <div class="fr05-chip" id="fr05-chip" dir="rtl">רהיטי עץ</div>
+  </div>
+
+  <div class="clip fr05-quote-wrap" data-start="2.4" data-duration="2.1" data-track-index="4">
+    <div class="fr05-quote" id="fr05-quote">
+      <p class="fr05-quote-line"><span class="fr05-quote-stars">★★★★★</span> העבודה יצאה מדהימה! המטבח נראה כמו חדש לגמרי.</p>
+      <p class="fr05-quote-cite">— שרה כ., חיפה</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var tl = gsap.timeline({ paused: true });
+
+    // ---- ambient glow blooms (un-triggered, bloom-in then hold) ----
+    tl.fromTo(
+      "#fr05-glow-a",
+      { opacity: 0, scale: 0.85 },
+      { opacity: 0.22, scale: 1, duration: 0.7, ease: "power2.out" },
+      0,
+    );
+    tl.fromTo(
+      "#fr05-glow-b",
+      { opacity: 0, scale: 0.85 },
+      { opacity: 0.28, scale: 1, duration: 0.7, ease: "power2.out" },
+      0.05,
+    );
+
+    // ---- Scene 1 (0.0-1.6s): split-tilt entry — signature move ----
+    // left card: from left, mirrored +tilt, overshoot settling to rest tilt
+    tl.fromTo(
+      "#fr05-card-left",
+      { x: -260, rotateY: 22, opacity: 0 },
+      { x: 0, rotateY: 14, opacity: 1, duration: 0.7, ease: "power3.out" },
+      0.05,
+    );
+    // right card: from right, mirrored -tilt, ~0.2s behind — this is the focal (after) side
+    tl.fromTo(
+      "#fr05-card-right",
+      { x: 260, rotateY: -22, opacity: 0 },
+      { x: 0, rotateY: -14, opacity: 1, duration: 0.7, ease: "power3.out" },
+      0.25,
+    );
+
+    // counter-phase idle float — never synchronized, subtle jitter only
+    tl.to(
+      "#fr05-card-left",
+      { y: -5, duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: 3 },
+      1.0,
+    );
+    tl.to(
+      "#fr05-card-right",
+      { y: 5, duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: 3 },
+      1.0,
+    );
+
+    // ---- Scene 2 (1.6-2.4s): label chip spring-pops bottom-center ----
+    // the one earned overshoot beat in this shot
+    tl.fromTo(
+      "#fr05-chip",
+      { scale: 0, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.4)" },
+      1.6,
+    );
+
+    // ---- Scene 3 (2.4-4.5s): testimonial fades up from the lower third, settles and holds ----
+    tl.fromTo(
+      "#fr05-quote",
+      { y: 26, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+      2.4,
+    );
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["05-reveal-furniture"] = tl;
+  })();
+</script>
+</template>
