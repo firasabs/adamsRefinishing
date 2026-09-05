@@ -1,0 +1,160 @@
+<template>
+  <style>
+    /* Root — styled by #root only (subcomposition_root_styled_by_class). */
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      container-type: size;
+    }
+
+    /* ---- Full-bleed ground (dedicated clip, never painted on #root) ---- */
+    .rd-bg {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+    }
+    .rd-bg-frame {
+      position: absolute;
+      inset: 4.4cqw;
+      border: 2px solid #111111;
+    }
+
+    /* ---- Content stage ---- */
+    .rd-stage-clip {
+      position: absolute;
+      inset: 0;
+    }
+    .rd-perspective {
+      position: absolute;
+      inset: 0;
+      display: block;
+      perspective: 2000px;
+    }
+    .rd-split-stage {
+      position: absolute;
+      top: 24cqh;
+      left: 5.9cqw;
+      width: 88.2cqw;
+      height: 43.75cqh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4.4cqw;
+      transform-style: preserve-3d;
+    }
+    .rd-card {
+      width: 41.8cqw;
+      height: 43.75cqh;
+      transform-style: preserve-3d;
+      will-change: transform;
+      background: #111111;
+      border: 2px solid #111111;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .rd-card-left {
+      box-shadow: -26px 30px 54px rgba(17, 17, 17, 0.38);
+    }
+    .rd-card-right {
+      box-shadow: 26px 30px 54px rgba(17, 17, 17, 0.38);
+    }
+    .rd-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ---- Label chip ---- */
+    .rd-chip {
+      position: absolute;
+      top: 74cqh;
+      left: 50%;
+      transform-origin: 50% 50%;
+      background: #b8893e;
+      color: #ffffff;
+      padding: 1.55cqh 4.4cqw;
+      border-radius: 4px;
+      white-space: nowrap;
+      font-family: sans-serif;
+      font-weight: 700;
+      font-size: 3.2cqw;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      will-change: transform, opacity;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="04-reveal-door"
+    data-start="0"
+    data-width="1080"
+    data-height="1920"
+  >
+    <!-- Full-bleed background ground — dedicated clip on the lowest track. -->
+    <div class="clip rd-bg" data-start="0" data-duration="4" data-track-index="0">
+      <div class="rd-bg-frame"></div>
+    </div>
+
+    <!-- Comparison-split content: two tilted door photos + label chip. -->
+    <div class="clip rd-stage-clip" data-start="0" data-duration="4" data-track-index="1">
+      <div class="rd-perspective">
+        <div class="rd-split-stage" id="rd-split-stage">
+          <div class="rd-card rd-card-left" id="rd-card-left">
+            <img src="assets/door1A.jpg" alt="" />
+          </div>
+          <div class="rd-card rd-card-right" id="rd-card-right">
+            <img src="assets/door1B.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="rd-chip" id="rd-chip">Door Painting</div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+
+    const tl = gsap.timeline({ paused: true });
+
+    /* ---- Scene 1 (0.0–1.6s): split-tilt entry — signature move. ----
+       Mirrored book-open rotateY, mirrored outward shadow already set in CSS,
+       opposite wings, right card ~0.2s behind the left. */
+    tl.fromTo(
+      "#rd-card-left",
+      { x: -240, rotateY: 22, opacity: 0 },
+      { x: 0, rotateY: 14, opacity: 1, duration: 0.7, ease: "power3.out" },
+      0.05,
+    );
+    tl.fromTo(
+      "#rd-card-right",
+      { x: 240, rotateY: -22, opacity: 0 },
+      { x: 0, rotateY: -14, opacity: 1, duration: 0.7, ease: "power3.out" },
+      0.25,
+    );
+
+    /* ---- Scene 2 (1.6–2.4s): label chip spring-pops bottom-center. ---- */
+    tl.fromTo(
+      "#rd-chip",
+      { xPercent: -50, scale: 0, opacity: 0 },
+      { xPercent: -50, scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" },
+      1.7,
+    );
+
+    /* ---- Scene 3 (2.4–4.0s): held spread, subtle counter-phase idle float. ---- */
+    tl.to(
+      "#rd-card-left",
+      { y: -6, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: 1 },
+      2.4,
+    );
+    tl.to(
+      "#rd-card-right",
+      { y: 6, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: 1 },
+      2.4,
+    );
+
+    window.__timelines["04-reveal-door"] = tl;
+  </script>
+</template>

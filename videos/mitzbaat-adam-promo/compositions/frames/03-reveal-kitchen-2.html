@@ -1,0 +1,182 @@
+<template>
+<div id="root" data-composition-id="03-reveal-kitchen-2">
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    /* ---- ground: full-bleed white + dual side-glow ambient (accent A ~30%, accent B ~70%) ---- */
+    .rk2-ground {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      z-index: 0;
+    }
+    .rk2-glow {
+      position: absolute;
+      top: 770px;
+      width: 900px;
+      height: 900px;
+      margin-top: -450px;
+      margin-left: -450px;
+      border-radius: 50%;
+      opacity: 0;
+      will-change: opacity;
+    }
+    .rk2-glow-a {
+      left: 324px; /* ~30% of 1080 */
+      background: radial-gradient(circle, rgba(184, 137, 62, 0.35) 0%, rgba(184, 137, 62, 0) 70%);
+    }
+    .rk2-glow-b {
+      left: 756px; /* ~70% of 1080 */
+      background: radial-gradient(circle, rgba(205, 162, 85, 0.3) 0%, rgba(205, 162, 85, 0) 70%);
+    }
+
+    /* ---- stage: split-tilt-cards (comparison-split blueprint, signature move) ---- */
+    .rk2-stage-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+    .rk2-perspective {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 420px;
+      height: 700px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1400px;
+    }
+    .rk2-split {
+      display: flex;
+      gap: 40px;
+      transform-style: preserve-3d;
+    }
+    .rk2-card {
+      width: 480px;
+      height: 700px;
+      overflow: hidden;
+      border: 3px solid #111111;
+      transform-style: preserve-3d;
+      transform-origin: 50% 50%;
+      will-change: transform;
+      background: #ffffff;
+    }
+    .rk2-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ---- label chip: single bottom-center service badge (replaces the twin before/after pills) ---- */
+    .rk2-chip-layer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 1150px;
+      display: flex;
+      justify-content: center;
+      z-index: 3;
+    }
+    .rk2-chip {
+      transform-origin: 50% 50%;
+      background: #b8893e;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 40px;
+      line-height: 1;
+      white-space: nowrap;
+      padding: 22px 48px;
+      will-change: transform, opacity;
+    }
+  </style>
+
+  <div class="clip rk2-ground" data-start="0" data-duration="5" data-track-index="0">
+    <div class="rk2-glow rk2-glow-a" id="rk2-glow-a"></div>
+    <div class="rk2-glow rk2-glow-b" id="rk2-glow-b"></div>
+  </div>
+
+  <div class="clip rk2-stage-layer" data-start="0" data-duration="5" data-track-index="1">
+    <div class="rk2-perspective">
+      <div class="rk2-split">
+        <div class="rk2-card" id="rk2-card-left">
+          <img src="assets/ze1.jpg" alt="Kitchen before" />
+        </div>
+        <div class="rk2-card" id="rk2-card-right">
+          <img src="assets/ze1B.jpg" alt="Kitchen after" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clip rk2-chip-layer" data-start="1.7" data-duration="3.3" data-track-index="2">
+    <div class="rk2-chip" id="rk2-chip" dir="rtl" lang="he">חידוש מטבחים</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true });
+
+      // ---- Scene 1 (0.0-1.7s): split-tilt entry (signature move) ----
+      // Left card: ze1.jpg (before), from the left with +tilt, settling from an overshot pivot.
+      tl.fromTo(
+        "#rk2-card-left",
+        { x: -260, scale: 0.85, rotateY: 20, opacity: 0 },
+        { x: 0, scale: 1, rotateY: 12, opacity: 1, duration: 0.8, ease: "power3.out" },
+        0,
+      );
+      // Right card: ze1B.jpg (after, focal), from the right with mirrored -tilt, ~0.2s behind.
+      tl.fromTo(
+        "#rk2-card-right",
+        { x: 260, scale: 0.85, rotateY: -20, opacity: 0 },
+        { x: 0, scale: 1, rotateY: -12, opacity: 1, duration: 0.8, ease: "power3.out" },
+        0.2,
+      );
+      // Dual side-glow ambient blooms in as the pair lands (one beat, un-triggered presence).
+      tl.fromTo(
+        "#rk2-glow-a",
+        { opacity: 0 },
+        { opacity: 1, duration: 1.1, ease: "power2.out" },
+        0,
+      );
+      tl.fromTo(
+        "#rk2-glow-b",
+        { opacity: 0 },
+        { opacity: 1, duration: 1.1, ease: "power2.out" },
+        0.1,
+      );
+
+      // ---- Scene 2 (1.7-2.6s): gold label chip spring-pops bottom-center ----
+      tl.fromTo(
+        "#rk2-chip",
+        { scale: 0, y: 16, opacity: 0 },
+        { scale: 1, y: 0, opacity: 1, duration: 0.55, ease: "back.out(1.5)" },
+        1.7,
+      );
+
+      // ---- Scene 3 (2.6-5.0s): held spread, phase-opposed idle float (never synchronized) ----
+      tl.to(
+        "#rk2-card-left",
+        { y: -5, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: 2 },
+        2.6,
+      );
+      tl.to(
+        "#rk2-card-right",
+        { y: 5, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: 2 },
+        2.6,
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["03-reveal-kitchen-2"] = tl;
+    })();
+  </script>
+</div>
+</template>
