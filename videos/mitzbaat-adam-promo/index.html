@@ -37,7 +37,7 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="29"
+      data-duration="34.5"
       data-width="1080"
       data-height="1920"
     >
@@ -87,28 +87,38 @@
         data-composition-id="05-reveal-furniture"
         data-composition-src="compositions/frames/05-reveal-furniture.html"
         data-start="17"
-        data-duration="4.9"
+        data-duration="5"
         data-track-index="0"
       ></div>
 
       <div
-        id="el-06-proof-stat"
+        id="el-06-reveal-table"
         class="scene"
-        data-composition-id="06-proof-stat"
-        data-composition-src="compositions/frames/06-proof-stat.html"
+        data-composition-id="06-reveal-table"
+        data-composition-src="compositions/frames/06-reveal-table.html"
         data-start="21.5"
-        data-duration="4"
+        data-duration="5.9"
         data-track-index="1"
       ></div>
 
       <div
-        id="el-07-cta-outro"
+        id="el-07-proof-stat"
         class="scene"
-        data-composition-id="07-cta-outro"
-        data-composition-src="compositions/frames/07-cta-outro.html"
-        data-start="25"
+        data-composition-id="07-proof-stat"
+        data-composition-src="compositions/frames/07-proof-stat.html"
+        data-start="27"
         data-duration="4"
         data-track-index="0"
+      ></div>
+
+      <div
+        id="el-08-cta-outro"
+        class="scene"
+        data-composition-id="08-cta-outro"
+        data-composition-src="compositions/frames/08-cta-outro.html"
+        data-start="30.5"
+        data-duration="4"
+        data-track-index="1"
       ></div>
 
     </div>
@@ -126,11 +136,13 @@
         tl.fromTo("#el-04-reveal-door", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 13);
         tl.to("#el-04-reveal-door", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 17);
         tl.fromTo("#el-05-reveal-furniture", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 17);
-        tl.to("#el-05-reveal-furniture", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power3.in" }, 21.5);
-        tl.fromTo("#el-06-proof-stat", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, 21.5);
-        tl.to("#el-06-proof-stat", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 25);
-        tl.fromTo("#el-07-cta-outro", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 25);
-        tl.to({}, { duration: 29 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+        tl.to("#el-05-reveal-furniture", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 21.5);
+        tl.fromTo("#el-06-reveal-table", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 21.5);
+        tl.to("#el-06-reveal-table", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power3.in" }, 27);
+        tl.fromTo("#el-07-proof-stat", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, 27);
+        tl.to("#el-07-proof-stat", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 30.5);
+        tl.fromTo("#el-08-cta-outro", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 30.5);
+        tl.to({}, { duration: 34.5 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
       })();
     </script>
   </body>

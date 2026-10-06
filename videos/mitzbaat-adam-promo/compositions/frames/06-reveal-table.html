@@ -1,0 +1,244 @@
+<template>
+  <style>
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-hebrew.woff2) format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-symbols.woff2) format('woff2');
+      unicode-range: U+2022, U+2460-24FF, U+25A0-27BF;
+    }
+    @font-face {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(assets/fonts/heebo-latin.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122;
+    }
+
+    /* Root — styled by #root only (subcomposition_root_styled_by_class). */
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      container-type: size;
+    }
+
+    /* ---- Full-bleed ground (dedicated clip, never painted on #root) ---- */
+    .rt-bg {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+    }
+    .rt-bg-frame {
+      position: absolute;
+      inset: 4.4cqw;
+      border: 2px solid #111111;
+    }
+
+    /* ---- Split-card stage (Scene 1-2) ---- */
+    .rt-stage-clip {
+      position: absolute;
+      inset: 0;
+    }
+    .rt-perspective {
+      position: absolute;
+      inset: 0;
+      display: block;
+      perspective: 2000px;
+    }
+    .rt-split-stage {
+      position: absolute;
+      top: 24cqh;
+      left: 5.9cqw;
+      width: 88.2cqw;
+      height: 43.75cqh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4.4cqw;
+      transform-style: preserve-3d;
+    }
+    .rt-card {
+      width: 41.8cqw;
+      height: 43.75cqh;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+      background: #111111;
+      border: 2px solid #111111;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .rt-card-left {
+      box-shadow: -26px 30px 54px rgba(17, 17, 17, 0.38);
+    }
+    .rt-card-right {
+      box-shadow: 26px 30px 54px rgba(17, 17, 17, 0.38);
+    }
+    .rt-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ---- Label chip ---- */
+    .rt-chip {
+      position: absolute;
+      top: 74cqh;
+      left: 50%;
+      transform-origin: 50% 50%;
+      background: #b8893e;
+      color: #111111;
+      padding: 1.55cqh 4.4cqw;
+      border-radius: 4px;
+      white-space: nowrap;
+      font-family: 'Heebo', sans-serif;
+      font-weight: 700;
+      font-size: 3.2cqw;
+      will-change: transform, opacity;
+    }
+
+    /* ---- Scene 3-4: installed-in-home payoff shot ---- */
+    .rt-install-clip {
+      position: absolute;
+      inset: 0;
+    }
+    .rt-install-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+    .rt-install-caption-wrap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 70cqh;
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+    .rt-install-caption {
+      background: rgba(17, 17, 17, 0.72);
+      color: #ffffff;
+      padding: 1.55cqh 5cqw;
+      border-radius: 4px;
+      white-space: nowrap;
+      font-family: 'Heebo', sans-serif;
+      font-weight: 700;
+      font-size: 3.4cqw;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="06-reveal-table"
+    data-start="0"
+    data-duration="5.9"
+    data-width="1080"
+    data-height="1920"
+  >
+    <!-- Full-bleed background ground — dedicated clip on the lowest track. -->
+    <div class="clip rt-bg" data-start="0" data-duration="5.9" data-track-index="0">
+      <div class="rt-bg-frame"></div>
+    </div>
+
+    <!-- Comparison-split content: two tilted table photos + label chip. -->
+    <div class="clip rt-stage-clip" data-start="0" data-duration="5.9" data-track-index="1">
+      <div class="rt-perspective">
+        <div class="rt-split-stage" id="rt-split-stage">
+          <div class="rt-card rt-card-left" id="rt-card-left">
+            <img src="assets/table-before.jpg" alt="" />
+          </div>
+          <div class="rt-card rt-card-right" id="rt-card-right">
+            <img src="assets/table-after.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="rt-chip" id="rt-chip" dir="rtl" lang="he">שולחנות עץ</div>
+    </div>
+
+    <!-- Installed-in-home payoff: the finished piece, in place, as a kitchen island. -->
+    <div class="clip rt-install-clip" data-start="0" data-duration="5.9" data-track-index="2">
+      <img class="rt-install-img" id="rt-install-img" src="assets/table-installed.jpg" alt="" />
+      <div class="rt-install-caption-wrap" id="rt-install-caption-wrap">
+        <div class="rt-install-caption" dir="rtl" lang="he">אצלכם בבית</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+
+    const tl = gsap.timeline({ paused: true });
+
+    /* ---- Scene 1 (0.0-1.6s): split-tilt entry - signature move. ----
+       Mirrored book-open rotateY, mirrored outward shadow already set in CSS,
+       opposite wings, right card ~0.2s behind the left. */
+    tl.fromTo(
+      "#rt-card-left",
+      { x: -240, rotateY: 22, opacity: 0 },
+      { x: 0, rotateY: 14, opacity: 1, duration: 0.7, ease: "power3.out" },
+      0.05,
+    );
+    tl.fromTo(
+      "#rt-card-right",
+      { x: 240, rotateY: -22, opacity: 0 },
+      { x: 0, rotateY: -14, opacity: 1, duration: 0.7, ease: "power3.out" },
+      0.25,
+    );
+
+    /* ---- Scene 2 (1.6-2.4s): label chip spring-pops bottom-center. ---- */
+    tl.fromTo(
+      "#rt-chip",
+      { xPercent: -50, scale: 0, opacity: 0 },
+      { xPercent: -50, scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" },
+      1.7,
+    );
+
+    /* ---- Scene 3 (2.4-3.6s): brief hold, then an internal crossfade from the
+       split cards into the installed-in-home payoff shot (within-frame cut,
+       never a between-frame exit). ---- */
+    tl.to(
+      "#rt-split-stage",
+      { opacity: 0, scale: 0.96, duration: 0.6, ease: "power2.inOut" },
+      3.0,
+    );
+    tl.to(
+      "#rt-chip",
+      { opacity: 0, duration: 0.4, ease: "power2.inOut" },
+      3.0,
+    );
+    tl.fromTo(
+      "#rt-install-img",
+      { opacity: 0, scale: 1.04 },
+      { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" },
+      3.1,
+    );
+
+    /* ---- Scene 4 (3.8-5.5s): the finished piece, in place - caption settles
+       and holds to the cut. No exit tween (the root transition owns the exit). ---- */
+    tl.fromTo(
+      "#rt-install-caption-wrap",
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      3.9,
+    );
+
+    window.__timelines["06-reveal-table"] = tl;
+  </script>
+</template>

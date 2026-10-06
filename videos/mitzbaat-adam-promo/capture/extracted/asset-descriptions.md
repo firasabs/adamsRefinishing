@@ -24,6 +24,21 @@ instead of re-crawling the live URL (see BRIEF.md Notes).
 - `reh1B.jpg` (768x1024, portrait) — same piece after: repainted/refinished. Matched pair with
   `reh1A.jpg`.
 
+## Wood table / counter refinish (`capture/assets/`)
+
+Source: user-supplied photos (not from the site), attached directly to the chat — a live-edge
+wood table/counter stripped from a dark painted finish down to bare wood and refinished.
+
+- `table-before.jpg` (1932x2576, portrait) — the piece mid-strip: most of the surface still
+  carries its old black topcoat, with a sanded strip exposing raw wood underneath and the
+  orbital sanders resting on top. Dramatic before shot — shows the strip-down process itself.
+- `table-after.jpg` (1932x2576, portrait) — the same piece fully refinished: bare wood sanded
+  smooth and sealed to a glossy natural finish, shot in the same outdoor spot. Matched pair with
+  `table-before.jpg`.
+- `table-installed.jpg` (1932x2576, portrait) — the finished top installed as a kitchen island on
+  a white cabinet base, in the customer's home. Payoff/proof shot — not part of the before/after
+  pair, used as a third beat showing the piece in its finished setting.
+
 ## Logo (`capture/assets/`)
 
 - `trans_airgun.png` (1024x1024, transparent) — primary brand mark (airgun/spray icon), for the

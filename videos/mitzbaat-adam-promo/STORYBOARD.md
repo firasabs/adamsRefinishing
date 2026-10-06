@@ -1,6 +1,6 @@
 ---
 format: 1080x1920
-duration: 29s
+duration: 34.5s
 message: "A tired kitchen or piece of furniture doesn't need replacing — 35 years of craft can make it look brand new."
 arc: BAB (before -> after tease -> proof -> CTA)
 audience: homeowners in Haifa and the surrounding area considering a kitchen or furniture refresh
@@ -31,11 +31,13 @@ every frame ends on a held read before the harness transition takes over.
   Scenes add one further piece at a time, and the final Scene is a held read — a subtle
   phase-opposed idle float (never synchronized, never lazy breathing) is the only thing allowed
   to move during a hold.
-- **Rhythm / held-frame allocation**: Frame 1 (hook) and Frame 6 (35-years statement) are the
-  video's two deliberate breather beats — low motion, calm holds. Frames 2–5 (the four
+- **Rhythm / held-frame allocation**: Frame 1 (hook) and Frame 7 (35-years statement) are the
+  video's two deliberate breather beats — low motion, calm holds. Frames 2–5 (four
   `comparison-split` reveals) run at a near-identical brisk cadence so they read as one montage
-  movement, not four separate videos. Frame 7 ends on the longest hold in the piece (the logo
-  lockup), per `logo-assemble-lockup`'s Brand_Outro convention.
+  movement; Frame 6 (the table reveal) rides the same comparison-split cadence before extending
+  into its own installed-in-home payoff beat — the video's one within-frame internal cut. Frame 8
+  ends on the longest hold in the piece (the logo lockup), per `logo-assemble-lockup`'s
+  Brand_Outro convention.
 - **Structural transitions**: `zoom-through` marks the two state changes (hook → first proof;
   proof run → statement); `crossfade` links same-world beats (within the reveal run, and
   statement → close).
@@ -190,14 +192,49 @@ Scene 3 (2.4–4.5s): the split holds (idle float) while the testimonial line fa
 lower third in a red-leftbar-card strip — "★★★★★ העבודה יצאה מדהימה! המטבח נראה כמו חדש לגמרי." on
 one line, "— שרה כ., חיפה" on a second, smaller line beneath — settles and holds to the cut.
 
-## Frame 6 — Proof: 35 years
+## Frame 6 — Reveal: Table + installed payoff
+
+- scene: A live-edge table stripped from black paint down to bare wood and refinished, then shown installed as a kitchen island in the customer's home
+- voiceover: ""
+- duration: 5.5s
+- transition_in: crossfade
+- status: outline
+- src: compositions/frames/06-reveal-table.html
+- type: feature_showcase
+- persuasion: Show-don't-tell proof (the strip-down itself, plus the finished setting)
+- beat: awe
+- blueprint: comparison-split
+- focal: assets/table-installed.jpg
+- roles: table-before.jpg = cutout-left, table-after.jpg = cutout-right, table-installed.jpg = background (full-bleed payoff, Scene 3-4 only)
+- asset_candidates: assets/table-before.jpg — table mid-strip, old black topcoat partly sanded off to bare wood, orbital sanders resting on top; assets/table-after.jpg — same table fully refinished, bare wood sealed to a glossy natural finish; assets/table-installed.jpg — the finished top installed as a kitchen island on a white cabinet base, in the customer's home
+- on_screen_text: "שולחנות עץ"
+- payoff_caption: "אצלכם בבית"
+
+Adapt: extends the comparison-split shape with a third act — after the usual split-tilt entry and
+label chip, the cards clear in an internal crossfade (never a between-frame exit) into a third,
+unpaired image: the finished table installed as a kitchen island. This is the video's one
+"where it ends up" beat — proof that the work holds up as a finished piece in someone's home, not
+just a staged photo pair. The black-to-raw-wood contrast is also the most dramatic before shot in
+the video — it shows the strip-down process itself, not just a tidied-up result.
+
+Scene 1 (0.0–1.6s): split-tilt entry (signature) — table-before.jpg left (+tilt), table-after.jpg
+right (−tilt, ~0.2s behind), scale 0.85→1.
+Scene 2 (1.6–2.4s): label chip "שולחנות עץ" spring-pops bottom-center.
+Scene 3 (3.0–3.8s): internal cut — the split cards and chip fade/scale down together (0.96,
+power2.inOut) while table-installed.jpg fades up full-bleed beneath them (scale 1.04→1,
+power2.out) — a clean crossfade from the proof pair to the payoff shot, built inside this
+composition, never as a between-frame exit.
+Scene 4 (3.9–5.5s): the installed shot holds; the caption "אצלכם בבית" fades up from the lower
+third and settles, holding to the cut.
+
+## Frame 7 — Proof: 35 years
 
 - scene: Calm statement card — the brand's own claim, no photo — "35+ years", "we come to your home", "free quote"
 - voiceover: ""
 - duration: 3.5s
 - transition_in: zoom-through
 - status: outline
-- src: compositions/frames/06-proof-stat.html
+- src: compositions/frames/07-proof-stat.html
 - type: branding
 - persuasion: Authority by association (experience)
 - beat: confidence
@@ -218,14 +255,14 @@ Scene 3 (1.5–3.5s): the one slide-up crossfade (signature) — "מעל 35 שנ
 as "של אהבה למקצוע" translates up from below to take its place at center; once settled, the
 sub-line "הגעה עד הבית · הצעת מחיר חינם" fades in beneath in mono chrome and holds to the cut.
 
-## Frame 7 — CTA / Outro
+## Frame 8 — CTA / Outro
 
 - scene: Logo mark draws in and locks up center-frame; the CTA line and tagline settle beneath it
 - voiceover: ""
 - duration: 4s
 - transition_in: crossfade
 - status: outline
-- src: compositions/frames/07-cta-outro.html
+- src: compositions/frames/08-cta-outro.html
 - type: cta
 - persuasion: Risk reversal (free, no obligation)
 - beat: motivation
